@@ -15,7 +15,6 @@
 		<li>The evaluation follows the standard operator precedence.</li>
 		<li>Both integers and floating point numbers are allowed.</li>
 		<li>The calculator does not support parentheses.</li>
-		<li></li>
 	</ul>
 	<?php 
 		//Checking if user has provided an expression.
@@ -24,13 +23,40 @@
 			//Initializing a varaible named 'expression' with the expression provided by the user.
 			$expression = $_GET[expression];
 
+			$errstring = '';
+			//error handler function
+			function customError($errno, $errstr) {
+				global $errstring;
+				$errstring = $errstr;
+			}
+			//set error handler
+			set_error_handler("customError", E_ALL);
+
+			if(!preg_match("/^[0-9\+\-\*\/ ]+$/", $expression)) {
+				$errstring="Invalid Input Expression $expression";
+			}
+
+			if(preg_match("/[0-9]+\s+[0-9]+/", $expression)) {
+				$errstring="Invalid Input Expression $expression";
+			}
+
 			//Evaluating the expression using PHP's eval() method.
-			eval("\$result = $expression;");
-	?> 
-	<h2>Result</h2>
-	<?php 
+			if ($errstring == '') {
+				eval("\$result = $expression;");
+			}
+	
 		//Echoing the Result
-		echo "$expression = $result";
+			if ($errstring == ''){
+	?> 
+				<h2>Result</h2>
+	<?php 
+				echo "$expression = $result";
+			} else {
+	?> 
+				<h2>Error</h2>
+	<?php 
+				echo "$errstring";
+			}
 		}
 	?>
 </body>
