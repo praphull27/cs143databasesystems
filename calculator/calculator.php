@@ -3,7 +3,7 @@
 <head><title>Calculator for CS143 - Database Systems Course</title></head>
 <body>
 	<h1>Calculator</h1>
-	(Ver 0.1 01/15/2014 by Praphull Kumar)<br />
+	(Ver 1.0 01/15/2014 by Praphull Kumar)<br />
 	Type an expression in the following box (e.g., 10.5+20*3/25).
 	<p>
 		<form method="GET">
