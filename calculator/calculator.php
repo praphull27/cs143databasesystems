@@ -36,7 +36,15 @@
 				$errstring="Invalid Input Expression $expression";
 			}
 
-			if(preg_match("/[0-9]+\s+[0-9]+/", $expression)) {
+			if(preg_match("/[0-9]\s+[0-9]/", $expression)) {
+				$errstring="Invalid Input Expression $expression";
+			}
+
+			if(preg_match("/\+\+/", $expression) || preg_match("/\-\-/", $expression) || preg_match("/\*\*/", $expression) || preg_match("/\/\//", $expression)) {
+				$errstring="Invalid Input Expression $expression";
+			}
+
+			if(preg_match("/\+\*/", $expression) || preg_match("/\+\//", $expression) || preg_match("/\-\*/", $expression) || preg_match("/\-\//", $expression)) {
 				$errstring="Invalid Input Expression $expression";
 			}
 
@@ -45,7 +53,7 @@
 				eval("\$result = $expression;");
 			}
 	
-		//Echoing the Result
+			//Echoing the Result
 			if ($errstring == ''){
 	?> 
 				<h2>Result</h2>
