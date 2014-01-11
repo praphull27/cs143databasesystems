@@ -40,19 +40,23 @@
 				$errstring="Invalid Input Expression $expression";
 			}
 
-			if(preg_match("/\+\+/", $expression) || preg_match("/\-\-/", $expression) || preg_match("/\*\*/", $expression) || preg_match("/\/\//", $expression) || preg_match("/\.\./", $expression)) {
+			if(preg_match("/[\+\-\*\/][\+\-\*\/]/", $expression) && !preg_match("/[0-9]\s*[\+\-][\+\-][0-9]/", $expression) && !preg_match("/[\*\/][\+\-][0-9]/", $expression)) {
 				$errstring="Invalid Input Expression $expression";
 			}
 
-			if(preg_match("/\+\*/", $expression) || preg_match("/\+\//", $expression) || preg_match("/\-\*/", $expression) || preg_match("/\-\//", $expression)) {
+			if(preg_match("/\+\+/", $expression) || preg_match("/\-\-/", $expression) || preg_match("/[\*\/]\s*[\*\/]/", $expression)) {
 				$errstring="Invalid Input Expression $expression";
 			}
 
-			if(preg_match("/^[\*\/]/", $expression) || preg_match("/[\+\-\*\/]$/", $expression) || preg_match("/^[\+\-]/", $expression) || preg_match("/^[\-\+]/", $expression)) {
+			if(preg_match("/^[\*\/]/", $expression) || preg_match("/[\+\-\*\/]$/", $expression)) {
+				$errstring="Invalid Input Expression $expression";
+			}
+			
+			if(preg_match("/\s[\+\-\*\/]\s+[\+\-\*\/]\s*/", $expression) && !preg_match("/[0-9]\s+[\+\-\*\/]\s+[\+\-][0-9]/", $expression)) {
 				$errstring="Invalid Input Expression $expression";
 			}
 
-			if(preg_match("/[0-9]\.[0-9]\./", $expression)) {
+			if(preg_match("/\.\./", $expression) || preg_match("/[0-9]\.[0-9]\./", $expression)) {
 				$errstring="Invalid Input Expression $expression";
 			}
 
