@@ -7,7 +7,7 @@
 	Type an expression in the following box (e.g., 10.5+20*3/25).
 	<p>
 		<form method="GET">
-			<input type="text" name="expr"><input type="submit" value="Calculate">
+			<input type="text" name="expression"><input type="submit" value="Calculate">
 		</form>
 	</p>
 	<ul>
@@ -17,7 +17,21 @@
 		<li>The calculator does not support parentheses.</li>
 		<li></li>
 	</ul>
-	<!-- <h2>Result</h2>
-	1+1 = 2 -->
+	<?php 
+		//Checking if user has provided an expression.
+		if($_GET[expression] != '') {
+
+			//Initializing a varaible named 'expression' with the expression provided by the user.
+			$expression = $_GET[expression];
+
+			//Evaluating the expression using PHP's eval() method.
+			eval("\$result = $expression;");
+	?> 
+	<h2>Result</h2>
+	<?php 
+		//Echoing the Result
+		echo "$expression = $result";
+		}
+	?>
 </body>
 </html>
