@@ -48,6 +48,14 @@
 				$errstring="Invalid Input Expression $expression";
 			}
 
+			if(preg_match("/^[\*\/]/", $expression) || preg_match("/[\+\-\*\/]$/", $expression) || preg_match("/^[\+\-]/", $expression) || preg_match("/^[\-\+]/", $expression)) {
+				$errstring="Invalid Input Expression $expression";
+			}
+
+			if(preg_match("/[0-9]\.[0-9]\./", $expression)) {
+				$errstring="Invalid Input Expression $expression";
+			}
+
 			//Evaluating the expression using PHP's eval() method.
 			if ($errstring == '') {
 				eval("\$result = $expression;");
