@@ -32,7 +32,7 @@
 			//set error handler
 			set_error_handler("customError", E_ALL);
 
-			if(!preg_match("/^[0-9\+\-\*\/ ]+$/", $expression)) {
+			if(!preg_match("/^[0-9\+\-\*\/ \.]+$/", $expression)) {
 				$errstring="Invalid Input Expression $expression";
 			}
 
@@ -40,7 +40,7 @@
 				$errstring="Invalid Input Expression $expression";
 			}
 
-			if(preg_match("/\+\+/", $expression) || preg_match("/\-\-/", $expression) || preg_match("/\*\*/", $expression) || preg_match("/\/\//", $expression)) {
+			if(preg_match("/\+\+/", $expression) || preg_match("/\-\-/", $expression) || preg_match("/\*\*/", $expression) || preg_match("/\/\//", $expression) || preg_match("/\.\./", $expression)) {
 				$errstring="Invalid Input Expression $expression";
 			}
 
