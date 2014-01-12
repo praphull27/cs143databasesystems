@@ -15,6 +15,7 @@
 		<li>The evaluation follows the standard operator precedence.</li>
 		<li>Both integers and floating point numbers are allowed.</li>
 		<li>The calculator does not support parentheses.</li>
+		<!--<li>Whitespace entered in the expression will be removed.</li>-->
 	</ul>
 	<?php 
 		//Checking if user has provided an expression.
@@ -31,6 +32,8 @@
 			}
 			//set error handler
 			set_error_handler("customError", E_ALL);
+
+			//$expression = preg_replace("/\s+/", "", $expression);
 
 			if(!preg_match("/^[0-9\+\-\*\/ \.]+$/", $expression)) {
 				$errstring="Invalid Input Expression $expression";
@@ -56,7 +59,7 @@
 				$errstring="Invalid Input Expression $expression";
 			}
 
-			if(preg_match("/\.\./", $expression) || preg_match("/[0-9]\.[0-9]\./", $expression)) {
+			if(preg_match("/\.\./", $expression) || preg_match("/\.[0-9]\./", $expression) || preg_match("/\.\s+[0-9]/", $expression)) {
 				$errstring="Invalid Input Expression $expression";
 			}
 
