@@ -77,7 +77,7 @@
 	?> 
 	<h2>Error</h2>
 	<?php 
-			echo "$errstring $expression";
+			echo "$errstring: $expression";
 		}
 	}
 	?>
