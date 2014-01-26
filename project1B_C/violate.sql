@@ -109,10 +109,38 @@ WHERE first = Dan;
 
 
 -- violates the Not Null constraint in table Actor. 
+-- Following query tries to update a tuple with a Null first name for an actor
+UPDATE Actor
+SET first = null
+WHERE id = 21;
+
+
+-- violates the Not Null constraint in table Actor. 
 -- Following query tries to update a tuple with a Null last name for an actor
 UPDATE Actor
 SET last = null
 WHERE id = 21;
+
+
+-- violates the Not Null constraint in table Director. 
+-- Following query tries to update a tuple with a Null date of birth for a director
+UPDATE Director
+SET dob = null
+WHERE id = 158;
+
+
+-- violates the Not Null constraint in table Director. 
+-- Following query tries to update a tuple with a Null first name for a director
+UPDATE Director
+SET first = null
+WHERE id = 158;
+
+
+-- violates the Not Null constraint in table Director. 
+-- Following query tries to update a tuple with a Null last name for a director
+UPDATE Director
+SET last = null
+WHERE id = 158;
 
 
 -- violates the Not Null constraint in table MaxMovieId. 

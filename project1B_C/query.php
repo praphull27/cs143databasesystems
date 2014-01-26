@@ -16,7 +16,7 @@
 		1) Pankuri Aggarwal - 604271339<br />
 		2) Praphull Kumar - 204271732<br /><br />
 		Type an SQL query in the following box:
-		<form method="GET" action ="query.php">
+		<form method="GET" action ="./query.php">
 			<textarea name="query" cols="60" rows="8"><?php 
 			$var = (isset($_GET['query'])) ? $_GET['query'] : ' '; 
 			echo trim($var); 
@@ -36,17 +36,16 @@
 
 if ($query != '') {
 
-	//$input_pattern = '/^(select|show)/i';
-	//$input_pattern = '/^.*$/i';
+	$input_pattern = '/^(select|show)/i';
 
-	//if (preg_match($input_pattern, $query)) {
+	if (preg_match($input_pattern, $query)) {
 		
 		function customError($errno, $errstr) {};
 		set_error_handler("customError", E_ALL);
 
 		$db_connection = mysql_connect("localhost", "cs143", "") or die ("<h3 class=\"error\">Database Connection Failed due to: " . mysql_errno() . " : " . mysql_error() . "</h3>");
 		
-		$db_selected=mysql_select_db("TEST", $db_connection);
+		$db_selected=mysql_select_db("CS143", $db_connection);
 		if (!$db_selected) {
 			echo "<h3 class=\"error\">Could not connect to the database due to: " . mysql_errno() . " : " . mysql_error() . "</h3>";
 			exit(1);
@@ -86,9 +85,9 @@ if ($query != '') {
 		echo "</table></br>";
 		$affected = mysql_affected_rows($db_connection);
 		mysql_close($db_connection);
-	/*}
+	}
 	else {
 		echo "<h3 class=\"error\">Only SELECT and SHOW queries are allowed</h3>" ;
-	}*/
+	}
 }
 ?>
