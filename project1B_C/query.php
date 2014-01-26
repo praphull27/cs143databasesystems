@@ -36,9 +36,10 @@
 
 if ($query != '') {
 
-	$input_pattern = '/^(select|show)/i';
+	//$input_pattern = '/^(select|show)/i';
+	//$input_pattern = '/^.*$/i';
 
-	if (preg_match($input_pattern, $query)) {
+	//if (preg_match($input_pattern, $query)) {
 		
 		function customError($errno, $errstr) {};
 		set_error_handler("customError", E_ALL);
@@ -61,7 +62,7 @@ if ($query != '') {
 
 		echo "<h3 class=\"common\">Result of the Query is:</h3>";
 		echo "Number of Rows returned is: <b>".$num_rows."</b></br></br>";
-		echo "<table cellpadding=5 border=2>";
+		echo "<table cellpadding=3 border=2>";
 		$column_size=mysql_num_fields($result);
 		$i=0;
 		echo '<tr>';
@@ -85,9 +86,9 @@ if ($query != '') {
 		echo "</table></br>";
 		$affected = mysql_affected_rows($db_connection);
 		mysql_close($db_connection);
-	}
+	/*}
 	else {
 		echo "<h3 class=\"error\">Only SELECT and SHOW queries are allowed</h3>" ;
-	}
+	}*/
 }
 ?>
