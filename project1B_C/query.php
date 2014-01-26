@@ -82,8 +82,7 @@ if ($query != '') {
 			}
 			echo '</tr>';
 		}
-		echo "</table></br>";
-		$affected = mysql_affected_rows($db_connection);
+		echo "</table>";
 		mysql_close($db_connection);
 	}
 	else {
