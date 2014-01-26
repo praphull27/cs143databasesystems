@@ -1,5 +1,3 @@
-USE TEST;
-
 DROP TABLE IF EXISTS MovieGenre;
 DROP TABLE IF EXISTS MovieDirector;
 DROP TABLE IF EXISTS MovieActor;
@@ -72,7 +70,7 @@ Create Table `Review` (
 	`comment` VARCHAR(500) COLLATE utf8_general_ci DEFAULT NULL COMMENT 'Reviewer Comment',
 	PRIMARY KEY (name, mid),
 	FOREIGN KEY (mid) REFERENCES Movie( id ),
-	CHECK ( rating <= 5)
+	CHECK ( rating >= 0 AND rating <= 5)
 ) ENGINE=INNODB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci; 
 
 Create Table `MaxPersonID` (

@@ -1,5 +1,3 @@
-USE TEST;
-
 -- Loading Data into Tables from the files.
 
 -- Loading Movie Tables
