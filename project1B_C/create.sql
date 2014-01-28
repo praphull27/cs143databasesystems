@@ -1,140 +1,145 @@
--- Dropping all the existing tables.
+-- Dropping the existing tables if exists.
+DROP TABLE IF EXISTS `Review`;
+DROP TABLE IF EXISTS `MovieActor`;
+DROP TABLE IF EXISTS `MovieDirector`;
+DROP TABLE IF EXISTS `MovieGenre`;
+DROP TABLE IF EXISTS `Director`;
+DROP TABLE IF EXISTS `Actor`;
+DROP TABLE IF EXISTS `Movie`;
+DROP TABLE IF EXISTS `MaxPersonID`;
+DROP TABLE IF EXISTS `MaxMovieID`;
 
-DROP TABLE IF EXISTS MovieGenre;
-DROP TABLE IF EXISTS MovieDirector;
-DROP TABLE IF EXISTS MovieActor;
-DROP TABLE IF EXISTS Review;
-DROP TABLE IF EXISTS MaxPersonID;
-DROP TABLE IF EXISTS MaxMovieID;
-DROP TABLE IF EXISTS Movie;
-DROP TABLE IF EXISTS Actor;
-DROP TABLE IF EXISTS Director;
 
--- Creating table "Movie" with following constraints:
--- 1. Primay Key = id
--- 2. "id" column can not have NULL
--- 3. "title" column can not have NULL
+-- TABLE structure for TABLE `Movie`
+-- Movie(id, title, year, rating, company)
+-- 1. Primary Key Constraint: `id`
+-- 2. Check Constraint on `id` column. `id` > 0
+-- 3. `title` column cannot have NULL.
 CREATE TABLE `Movie` (
-	`id` INT NOT NULL COLLATE utf8_general_ci COMMENT 'Movie ID',
-	`title` VARCHAR(100) NOT NULL COLLATE utf8_general_ci COMMENT 'Movie Title',
-	`year` INT COLLATE utf8_general_ci DEFAULT NULL COMMENT 'Release Year',
-	`rating` VARCHAR(10) COLLATE utf8_general_ci DEFAULT NULL COMMENT 'MPAA Rating',
-	`company` VARCHAR(50) COLLATE utf8_general_ci DEFAULT NULL COMMENT 'Production Company',
+	`id` INT NOT NULL COMMENT 'Movie ID' CHECK (`id` > 0),
+	`title` VARCHAR(100) NOT NULL COMMENT 'Movie Title',
+	`year` INT DEFAULT NULL COMMENT 'Release Year',
+	`rating` VARCHAR(10) DEFAULT NULL COMMENT 'MPAA Rating',
+	`company` VARCHAR(50) DEFAULT NULL COMMENT 'Production Company',
 	PRIMARY KEY (`id`)
-) ENGINE=INNODB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=INNODB DEFAULT CHARSET=utf8;
 
 
--- Creating table "Actor" with following constraints:
--- 1. Primay Key = id
--- 2. "id" column can not have NULL
--- 3. "last" column can not have NULL
--- 4. "first" column can not have NULL
--- 5. "dob" column can not have NULL
--- 6. Date of Birth is always less than Date of Death
-Create Table `Actor` (
-	`id` INT NOT NULL COLLATE utf8_general_ci COMMENT 'Actor ID',
-	`last` VARCHAR(20) NOT NULL COLLATE utf8_general_ci COMMENT 'Last name',
-	`first` VARCHAR(20) NOT NULL COLLATE utf8_general_ci COMMENT 'First name',
-	`sex` VARCHAR(6) COLLATE utf8_general_ci DEFAULT NULL COMMENT 'Sex of the actor',
+-- TABLE structure for TABLE `Actor`
+-- Actor(id, last, first, sex, dob, dod)
+-- 1. Primary Key Constraint: `id`
+-- 2. Check Constraint on `id` column. `id` > 0
+-- 3. `dob` column cannot have NULL.
+-- 4. Check Constraint on `dob` and `dod` columns. `dob` < `dod`
+-- 5. Check Constraint on `last` and `first` columns. For a particular tuple both cannot be NULL.
+CREATE TABLE `Actor` (
+	`id` INT NOT NULL COMMENT 'Actor ID' CHECK (`id` > 0),
+	`last` VARCHAR(20) DEFAULT NULL COMMENT 'Last name',
+	`first` VARCHAR(20) DEFAULT NULL COMMENT 'First name',
+	`sex` VARCHAR(6) DEFAULT NULL COMMENT 'Sex of the actor',
 	`dob` DATE NOT NULL COMMENT 'Date of Birth',
 	`dod` DATE DEFAULT NULL COMMENT 'Date of Death',
-	PRIMARY KEY (id),
-	CHECK (dob < dod )
-) ENGINE=INNODB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+	PRIMARY KEY (`id`),
+	CHECK (`dob` < `dod`),
+	CHECK (`last` IS NOT NULL OR `first` IS NOT NULL)
+) ENGINE=INNODB DEFAULT CHARSET=utf8;
 
 
--- Creating table "Director" with following constraints:
--- 1. Primay Key = id
--- 2. "id" column can not have NULL
--- 3. "last" column can not have NULL
--- 4. "first" column can not have NULL
--- 5. "dob" column can not have NULL
--- 6. Date of Birth is always less than Date of Death
-Create Table `Director` (
-	`id` INT NOT NULL  COLLATE utf8_general_ci COMMENT 'Director ID',
-	`last` VARCHAR(20) NOT NULL  COLLATE utf8_general_ci COMMENT 'Last name',
-	`first` VARCHAR(20) NOT NULL  COLLATE utf8_general_ci COMMENT 'First name',
+-- TABLE structure for TABLE `Director`
+-- Director(id, last, first, dob, dod)
+-- 1. Primary Key Constraint: `id`
+-- 2. Check Constraint on `id` column. `id` > 0
+-- 3. `dob` column cannot have NULL.
+-- 4. Check Constraint on `dob` and `dod` columns. `dob` < `dod`
+-- 5. Check Constraint on `last` and `first` columns. For a particular tuple both cannot be NULL.
+CREATE TABLE `Director` (
+	`id` INT NOT NULL COMMENT 'Director ID' CHECK (`id` > 0),
+	`last` VARCHAR(20) DEFAULT NULL COMMENT 'Last name',
+	`first` VARCHAR(20) DEFAULT NULL COMMENT 'First name',
 	`dob` DATE NOT NULL COMMENT 'Date of Birth',
 	`dod` DATE DEFAULT NULL COMMENT 'Date of Death',
-	PRIMARY KEY (id),
-	CHECK (dob < dod )
-) ENGINE=INNODB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+	PRIMARY KEY (`id`),
+	CHECK (`dob` < `dod`),
+	CHECK (`last` IS NOT NULL OR `first` IS NOT NULL)
+) ENGINE=INNODB DEFAULT CHARSET=utf8;
 
 
--- Creating table "MovieGenre" with following constraints:
--- 1. Primary Key = (mid,genre)
--- 2. "mid" column can not have NULL
--- 3. "genre" column can not have NULL
--- 4. Foreign Key : "mid" column refers to "id" column of Movie table
-Create Table `MovieGenre` (
-	`mid` INT NOT NULL COLLATE utf8_general_ci COMMENT 'Movie ID',
-	`genre` VARCHAR(20) NOT NULL COLLATE utf8_general_ci COMMENT 'Movie genre',
-	FOREIGN KEY (mid) REFERENCES Movie( id ),
-	PRIMARY KEY (mid,genre)
-) ENGINE=INNODB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+-- TABLE structure for TABLE `MovieGenre`
+-- MovieGenre(mid, genre)
+-- 1. Primary Key Constraint: `mid`,`genre`
+-- 2. Foreign Key Constraint: `mid` column of `MovieGenre` table refers to `id` column of `Movie` table.
+CREATE TABLE `MovieGenre` (
+	`mid` INT NOT NULL COMMENT 'Movie ID',
+	`genre` VARCHAR(20) NOT NULL COMMENT 'Movie genre',
+	PRIMARY KEY (`mid`,`genre`),
+	FOREIGN KEY (`mid`) REFERENCES `Movie` (`id`) ON DELETE CASCADE
+) ENGINE=INNODB DEFAULT CHARSET=utf8;
 
 
--- Creating table "MovieDirector" with following constraints:
--- 1. Primary Key = (mid,did)
--- 2. "mid" column can not have NULL
--- 3. "did" column can not have NULL
--- 4. Foreign Key : "mid" column refers to "id" column of Movie table
--- 4. Foreign Key : "did" column refers to "id" column of Director table
-Create Table `MovieDirector` (
-	`mid` INT NOT NULL COLLATE utf8_general_ci COMMENT 'Movie ID',
-	`did` INT NOT NULL COLLATE utf8_general_ci COMMENT 'Director ID',
-	FOREIGN KEY (mid) REFERENCES Movie( id ),
-	FOREIGN KEY (did) REFERENCES Director( id ),
-	PRIMARY KEY (mid,did)
-) ENGINE=INNODB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+-- TABLE structure for TABLE `MovieDirector`
+-- MovieDirector(mid, did)
+-- 1. Primary Key Constraint: `mid`,`did`
+-- 3. Foreign Key Constraint: `mid` column of `MovieDirector` table refers to `id` column of `Movie` table.
+-- 4. Foreign Key Constraint: `did` column of `MovieDirector` table refers to `id` column of `Director` table.
+CREATE TABLE `MovieDirector` (
+	`mid` INT NOT NULL COMMENT 'Movie ID',
+	`did` INT NOT NULL COMMENT 'Director ID',
+	PRIMARY KEY (`mid`,`did`),
+	FOREIGN KEY (`mid`) REFERENCES `Movie` (`id`) ON DELETE CASCADE,
+	FOREIGN KEY (`did`) REFERENCES `Director` (`id`) ON DELETE CASCADE
+) ENGINE=INNODB DEFAULT CHARSET=utf8;
 
 
--- Creating table "MovieActor" with following constraints:
--- 1. Unique Constraint on (mid,aid,role)
--- 2. "mid" column can not have NULL
--- 3. "aid" column can not have NULL
--- 4. Foreign Key : "mid" column refers to "id" column of Movie table
--- 5. Foreign Key : "aid" column refers to "id" column of Actor table
-Create Table `MovieActor` (
-	`mid` INT NOT NULL COLLATE utf8_general_ci COMMENT 'Movie ID',
-	`aid` INT NOT NULL COLLATE utf8_general_ci COMMENT 'Actor ID',
-	`role` VARCHAR(50) COLLATE utf8_general_ci DEFAULT NULL COMMENT 'Actor role in movie',
-	FOREIGN KEY (mid) REFERENCES Movie( id ),
-	FOREIGN KEY (aid) REFERENCES Actor( id ),
-	UNIQUE(mid,aid,role)
-) ENGINE=INNODB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+-- TABLE structure for TABLE `MovieActor`
+-- MovieActor(mid, aid, role)
+-- 1. Unique Key Constraint: `mid`,`aid`,`role`
+-- 2. `mid` column cannot have NULL.
+-- 3. `aid` column cannot have NULL.
+-- 4. Foreign Key Constraint: `mid` column of `MovieActor` table refers to `id` column of `Movie` table.
+-- 5. Foreign Key Constraint: `aid` column of `MovieActor` table refers to `id` column of `Actor` table.
+CREATE TABLE `MovieActor` (
+	`mid` INT NOT NULL COMMENT 'Movie ID',
+	`aid` INT NOT NULL COMMENT 'Actor ID',
+	`role` VARCHAR(50) DEFAULT NULL COMMENT 'Actor role in movie',
+	UNIQUE (`mid`,`aid`,`role`),
+	FOREIGN KEY (`mid`) REFERENCES `Movie` (`id`) ON DELETE CASCADE,
+	FOREIGN KEY (`aid`) REFERENCES `Actor` (`id`) ON DELETE CASCADE
+) ENGINE=INNODB DEFAULT CHARSET=utf8;
 
 
--- Creating table "Review" with following constraints:
--- 1. Primary Key = (name, mid)
--- 2. "name" column can not have NULL
--- 3. "time" column can not have NULL
--- 4. "mid" column can not have NULL
--- 5. "rating" column can not have NULL
--- 6. Rating is always between 0 and 5
--- 7. Foreign Key : "mid" column refers to "id" column of Movie table
-Create Table `Review` (
-	`name` INT NOT NULL COLLATE utf8_general_ci COMMENT 'Reviewer name',
+-- TABLE structure for TABLE `Review`
+-- Review(name, time, mid, rating, comment)
+-- 1. Primary Key Constraint: `name`,`mid`
+-- 2. `time` column cannot have NULL.
+-- 5. `rating` column cannot have NULL.
+-- 6. Check Constraint on `rating` column. Rating is always between 0 and 5
+-- 7. Foreign Key Constraint: `mid` column of `Review` table refers to `id` column of `Movie` table.
+CREATE TABLE `Review` (
+	`name` VARCHAR(20) NOT NULL COMMENT 'Reviewer name',
 	`time` TIMESTAMP NOT NULL COMMENT 'Review time',
-	`mid` INT NOT NULL COLLATE utf8_general_ci COMMENT 'Movie ID',
-	`rating` INT NOT NULL COLLATE utf8_general_ci COMMENT 'Review rating',
-	`comment` VARCHAR(500) COLLATE utf8_general_ci DEFAULT NULL COMMENT 'Reviewer Comment',
-	PRIMARY KEY (name, mid),
-	FOREIGN KEY (mid) REFERENCES Movie( id ),
-	CHECK ( rating >= 0 AND rating <= 5)
-) ENGINE=INNODB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci; 
+	`mid` INT NOT NULL COMMENT 'Movie ID',
+	`rating` INT NOT NULL COMMENT 'Review rating',
+	`comment` VARCHAR(500) DEFAULT NULL COMMENT 'Reviewer Comment',
+	PRIMARY KEY (`name`,`mid`),
+	FOREIGN KEY (`mid`) REFERENCES `Movie` (`id`) ON DELETE CASCADE,
+	CHECK (`rating` >= 0 AND `rating` <= 5)
+) ENGINE=INNODB DEFAULT CHARSET=utf8; 
 
 
--- Creating table "MaxPersonID" with following constraints:
--- 1. "id" column can not have NULL
-Create Table `MaxPersonID` (
-	`id` INT NOT NULL COLLATE utf8_general_ci COMMENT 'Max ID assigned to all persons'
-) ENGINE=INNODB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+-- TABLE structure for TABLE `MaxPersonID`
+-- MaxPersonID(id)
+-- 1. Primary Key Constraint: `id`
+CREATE TABLE `MaxPersonID` (
+	`id` INT NOT NULL COMMENT 'Max ID assigned to all persons',
+	PRIMARY KEY (`id`)
+) ENGINE=INNODB DEFAULT CHARSET=utf8;
 
 
--- Creating table "MaxMovieID" with following constraints:
--- 1. "id" column can not have NULL
-Create Table `MaxMovieID` (
-	`id` INT NOT NULL COLLATE utf8_general_ci COMMENT 'Max ID assigned to all movies'
-) ENGINE=INNODB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+-- TABLE structure for TABLE `MaxMovieID`
+-- MaxMovieID(id)
+-- 1. Primary Key Constraint: `id`
+CREATE TABLE `MaxMovieID` (
+	`id` INT NOT NULL COMMENT 'Max ID assigned to all movies',
+	PRIMARY KEY (`id`)
+) ENGINE=INNODB DEFAULT CHARSET=utf8;
 
