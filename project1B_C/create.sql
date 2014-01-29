@@ -79,8 +79,8 @@ CREATE TABLE `MovieGenre` (
 -- TABLE structure for TABLE `MovieDirector`
 -- MovieDirector(mid, did)
 -- 1. Primary Key Constraint: `mid`,`did`
--- 3. Foreign Key Constraint: `mid` column of `MovieDirector` table refers to `id` column of `Movie` table.
--- 4. Foreign Key Constraint: `did` column of `MovieDirector` table refers to `id` column of `Director` table.
+-- 2. Foreign Key Constraint: `mid` column of `MovieDirector` table refers to `id` column of `Movie` table.
+-- 3. Foreign Key Constraint: `did` column of `MovieDirector` table refers to `id` column of `Director` table.
 CREATE TABLE `MovieDirector` (
 	`mid` INT NOT NULL COMMENT 'Movie ID',
 	`did` INT NOT NULL COMMENT 'Director ID',
@@ -110,10 +110,9 @@ CREATE TABLE `MovieActor` (
 -- TABLE structure for TABLE `Review`
 -- Review(name, time, mid, rating, comment)
 -- 1. Primary Key Constraint: `name`,`mid`
--- 2. `time` column cannot have NULL.
--- 5. `rating` column cannot have NULL.
--- 6. Check Constraint on `rating` column. Rating is always between 0 and 5
--- 7. Foreign Key Constraint: `mid` column of `Review` table refers to `id` column of `Movie` table.
+-- 2. `rating` column cannot have NULL.
+-- 3. Check Constraint on `rating` column. Rating is always between 0 and 5
+-- 4. Foreign Key Constraint: `mid` column of `Review` table refers to `id` column of `Movie` table.
 CREATE TABLE `Review` (
 	`name` VARCHAR(20) NOT NULL COMMENT 'Reviewer name',
 	`time` TIMESTAMP NOT NULL COMMENT 'Review time',

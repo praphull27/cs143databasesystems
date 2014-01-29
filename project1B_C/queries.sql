@@ -6,10 +6,10 @@ WHERE M.id = MA.mid AND MA.aid = A.id AND M.title = 'Die Another Day';
 
 -- Count of all the actors who acted in multiple movies
 SELECT COUNT(*) AS `Count Of Actors With Multiple Movies`
-FROM (SELECT MA.aid
-	FROM MovieActor MA
-	GROUP BY MA.aid
-	HAVING COUNT(*) > 1) ActorsWithMultipleMovies;
+FROM (SELECT DMA.daid
+	FROM (Select DISTINCT MA.mid AS dmid,MA.aid AS daid FROM MovieActor MA) DMA
+	GROUP BY DMA.daid
+	HAVING  COUNT(*) > 1) ActorsWithMultipleMovies;
 
 
 -- Names of actors who acted in movies belonging to 14 or more genres.
