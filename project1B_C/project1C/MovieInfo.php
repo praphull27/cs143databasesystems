@@ -3,12 +3,13 @@
 		<title>Actor Information</title>
 		<style type="text/css">
 		body {background: #ECECEC;padding: 5px 0;}
-		.wrapper{margin: 0 auto; width: 900px; height: auto;padding: 6px; background: white;border-style:solid; border-color:#C8C8C8 ;border-radius:10px;border-width:2px;}
-		.header {color: #999999;font-size: 17px;font-weight: normal;padding-bottom: 0;font-family: Verdana,Arial,sans-serif;}
-		.radio_header {padding-left: 220px;color: #999999;font-size: 13px;font-weight: normal;padding-bottom: 0;font-family: Verdana,Arial,sans-serif;}
+		.wrapper{margin: 0 auto; width: 900px; height: auto;padding: 3px; background: white;border-style:solid; border-color:#C8C8C8 ;border-radius:10px;border-width:2px;}
+		.subwrapper{margin: 0 auto; width: 890px; height: auto;padding: 3px; background: white;border-style:solid; border-color:#C8C8C8 ;border-radius:10px;border-width:1px;}
+		.header {color: #686868 ;font-size: 17px;font-weight: normal;padding-bottom: 0;font-family: Verdana,Arial,sans-serif;}
+		.radio_header {padding-left: 220px;color: #686868;font-size: 13px;font-weight: normal;padding-bottom: 0;font-family: Verdana,Arial,sans-serif;}
 		.movie_name_header {color: #000000;font-size: 27px;font-weight: normal;font-family: Verdana,Arial,sans-serif;float: left;}
 		.text {color: #3366FF;font-size: 17px;font-weight: normal;padding-top: 6px;font-family: Verdana,Arial,sans-serif;}
-		.star {background-image: url(star.jpg);color: #000000; margin: 0px 0 0 0;background-position: -290px -50px;width: 90px;height:80px;line-height:66px;display: inline-block;text-align: center;vertical-align: middle;font-size: 30px;font-weight: bold;font-family:Verdana,Arial,sans-serif;float : right}
+		.star {background-image: url(star.jpg);color: #B80000; margin: 0px 0 0 0;background-position: -290px -50px;width: 90px;height:80px;line-height:66px;display: inline-block;text-align: center;vertical-align: middle;font-size: 20px;font-weight: bold;font-family:Verdana,Arial,sans-serif;float : right}
 		.text2 {color: #3366FF;font-size: 13px;font-weight: normal;padding-top: 6px;font-family: Verdana,Arial,sans-serif;}
 		.ytext {color: #336699;font-size: 17px;font-weight: normal;padding-top: 6px;font-family: Verdana,Arial,sans-serif;}
 		.ytextheader {color: #000000;font-size: 20px;font-weight: normal;padding-top: 6px;font-family: Verdana,Arial,sans-serif;}
@@ -25,15 +26,14 @@
 		.info_header {color: #202020;font-size: 27px;font-weight: normal;padding-bottom: 0;font-family: Verdana,Arial,sans-serif;}
 		.Info_Text {font-size: 17px;font-weight: normal;padding-bottom: 0;font-family: Verdana,Arial,sans-serif;}
 		.year_col {float: right;text-align: right;font-size: 13px;font-family: Verdana,Arial,sans-serif;font-weight: normal;color: #000000}
-		.movieInfo_odd {color: #3366FF;vertical-align: middle;padding: 5px 10px 6px;background-color: #f6f6f5;border: #fff 1px solid;display: block;}
+		.movieInfo_odd {color: #3366FF;vertical-align: middle;padding: 5px 10px 6px;background-color: #f6f6f5;border: #fff 1px solid;display:block;}
 		.movieInfo_even {color: #3366FF;vertical-align: middle;padding: 5px 10px 6px;background-color: #fbfbfb;border: #fff 1px solid;display: block;}
-		.header2 {box-shadow: 10px 10px 5px #888888;background-color: #Eee;border-top: #e8e8e8 1px solid;cursor: pointer;font-size: 15px;color: #a58500;margin: 0 0 1px 0;padding: 6px 10px;display: block;font-family: Verdana,Arial,sans-serif;}
+		.header2 {box-shadow: 10px 10px 5px #F8F8F8 inset;background-color: #Eee;border-top: #e8e8e8 1px solid;cursor: pointer;font-size: 15px;color: #a58500;margin: 0 0 1px 0;padding: 6px 10px;display: block;font-family: Verdana,Arial,sans-serif;}
 		
 		
 		</style>
 	</head>	
 	<body>
-			
 			<div class= "wrapper">
 			<div class = image_header> <p></p></div>
 			
@@ -51,7 +51,7 @@
 			
 		</form>
 		</div>
-		<BR />
+		
 		<div class= "wrapper">
 <?php
 require_once 'MovieQuery.php';
@@ -83,7 +83,7 @@ require_once 'MovieQuery.php';
 				$countreviews = $crrow[0];
 			}
 			$dresult = getMovieDirector($mid);
-			echo "<div><table width=\"100%\"><tbody><tr><td width=\"60%\"><div><div class =\"movie_name_header\"><B>".$title."</B></div>  <div class=\"text\">   (".$year.")</div></div><br><div class=\"text\" style = \"float: left\"> ";
+			echo "<div><table width=\"100%\"><tbody><tr><td width=\"60%\"><div><div class =\"movie_name_header\"><B>".$title."</B></div> <div class=\"text\">(".$year.")</div></div><br><div class=\"text\" style = \"float: left\"> ";
 			
 			if($gresult!=""){
 			$num_rows = mysql_num_rows($gresult);
@@ -137,26 +137,28 @@ require_once 'MovieQuery.php';
 			
 			$aresult = getMovieActor($mid);
 			if($aresult!=""){
-				echo "<br><div class = ytextheader><B>Cast</B></div>";
+				echo "<br><div class = \"subwrapper\"><div class = \"header2\"><B>Cast</B></div>";
 				$i=1;
+				
 				while ($arow = mysql_fetch_row($aresult)) {
 						
 						if($i%2==1){
-							echo "<div class = \"movieInfo_odd\"><span class = \"year_col\">".$arow[3]."</span><B><a href=\"http://192.168.56.20/~cs143/project1B_C/project1C/ActorInfo.php?id=".$arow[0]."\" style=\"text-decoration: none\">".$arow[1]." ".$arow[2]."</a></B></div>";
+							echo "<div class = \"movieInfo_odd\"><a href=\"http://192.168.56.20/~cs143/project1B_C/project1C/ActorInfo.php?id=".$arow[0]."\" style=\"text-decoration: none;color: #3366FF;\">".$arow[1]." ".$arow[2]."</a><br>(".$arow[3].")</div>";
 						
 						}else{
-							echo "<div class = \"movieInfo_even\"><span class = \"year_col\">".$arow[3]."</span><B><a href=\"http://192.168.56.20/~cs143/project1B_C/project1C/ActorInfo.php?id=".$arow[0]."\" style=\"text-decoration: none\">".$arow[1]." ".$arow[2]."</a></B></div>";
+								echo "<div class = \"movieInfo_even\"><a href=\"http://192.168.56.20/~cs143/project1B_C/project1C/ActorInfo.php?id=".$arow[0]."\" style=\"text-decoration: none;color: #3366FF;\">".$arow[1]." ".$arow[2]."</a><br>(".$arow[3].")</div>";
 						}
 						
 					$i = $i+1;
 				
 				}
+				echo "</div>";
 			  
 			}
 		
 			$rresult = getReview($mid);
 			if($rresult!=""){
-					echo "<br><div class = ytextheader><B>User Reviews</B></div>";
+					echo "<br><div class = \"subwrapper\"><div class = \"header2\"><B>User Reviews</B></div>";
 					$i=1;
 				while ($rrow = mysql_fetch_row($rresult)) {
 						
@@ -170,6 +172,7 @@ require_once 'MovieQuery.php';
 					$i = $i+1;
 				
 				}
+				echo "</div>";
 			
 			
 			}

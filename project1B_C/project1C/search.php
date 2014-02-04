@@ -2,17 +2,20 @@
 	<head>
 		<title>Search Actor / Movie</title>
 		<style type="text/css">
+		.wrapper{margin: 0 auto; width: 900px; height: auto;padding: 3px; background: white;border-style:solid; border-color:#C8C8C8 ;border-radius:10px;border-width:2px;}
+		.header {color: #686868 ;font-size: 17px;font-weight: normal;padding-bottom: 0;font-family: Verdana,Arial,sans-serif;}
+		.radio_header {padding-left: 220px;color: #686868;font-size: 13px;font-weight: normal;padding-bottom: 0;font-family: Verdana,Arial,sans-serif;}
 		.sectionheader {font-size: 15px;color:#a58500;margin: 0 0 .5em;padding: 0;font-family: Verdana,Arial,sans-serif;font-weight:bold;}
-		.header {color: #202020;font-size: 17px;font-weight: normal;padding-bottom: 0;font-family: Verdana,Arial,sans-serif;}
+		.header_result {color: #202020;font-size: 17px;font-weight: normal;padding-bottom: 0;font-family: Verdana,Arial,sans-serif;}
 		.findList {border-collapse: collapse;width: 100%;display: table;border-spacing: 2px;border-color: gray;font-family: Verdana,Arial,sans-serif;color: #333;font-size: 13px;}
 		.findResult_odd {background-color: #f6f6f5;border: #fff 1px solid;display: table-row;border-spacing: 2px;padding: 20px}
 		.findResult_even {background-color: #fbfbfb;border: #fff 1px solid;display: table-row;padding: 20px}
 		body {background: #ECECEC;padding: 5px 0;}
-		.wrapper {margin: 0 auto; width: 900px; height: auto;  padding: 10px; background: white;}
 		.result_Text {color: #3366FF;font-size: 13px;font-weight: normal;padding-bottom: 0;font-family: Verdana,Arial,sans-serif;}
 		.error_Text {font-size: 13px;font-weight: normal;padding-bottom: 0;font-family: Verdana,Arial,sans-serif;}
 		.image_header {height: 80px; margin: 0px 0 0 0; background-image: url(movies_banner.jpg);}
-		.radio_header {padding-left: 220px}
+		.header2 {box-shadow: 10px 10px 5px #F8F8F8 inset;background-color: #Eee;border-top: #e8e8e8 1px solid;cursor: pointer;font-size: 15px;color: #a58500;margin: 0 0 1px 0;padding: 6px 10px;display: block;font-family: Verdana,Arial,sans-serif;}
+		.subwrapper{margin: 0 auto; width: 890px; height: auto;padding: 3px; background: white;border-style:solid; border-color:#C8C8C8 ;border-radius:10px;border-width:1px;}
 		</style>
 	</head>	
 	<body>
@@ -31,8 +34,8 @@
 			<input type="radio" name="type" value="movie">Movie
 			</div>
 		</form>
-		<hr/>
-				
+		
+			</div>	<div class= "wrapper">
 
 
 
@@ -90,9 +93,10 @@ if($keywords[0]!=''){
 	}
 	
 	if(!($noMovies && $noActor)){
-		echo "<h1 class = \"header\">Results for <B>\"".$keyword."\"</h1></B>";
+		echo "<h1 class = \"header_result\">Results for <B>\"".$keyword."\"</h1></B>";
 		if(!($noActor)){
-			echo "<BR /><h3 class=\"sectionheader\" > Names:</h3><BR />";
+			echo "<div class = \"subwrapper\">";
+			echo "<div class = \"header2\"><B>Names:</B></div>";
 			//print actor data
 			
 			$i = 1;
@@ -109,12 +113,13 @@ if($keywords[0]!=''){
 				$i = $i+1;
 			}
 			echo "</tbody></table>";
+			echo "</div><br>";
 		}
 		if(!($noMovies)){
-	
-		echo "<BR /><h3 class=\"sectionheader\" > Titles:</h3><BR />";
+		echo "<div class = \"subwrapper\">";
+		echo "<div class=\"header2\"><B> Titles:</B></div>";
 		//print movie data
-		
+			
 			$j = 1;
 			echo "<table class = \"findList\">";
 			echo "<tbody>";
@@ -128,6 +133,7 @@ if($keywords[0]!=''){
 				
 				$j = $j+1;
 			}echo "</tbody></table>";
+			echo "</div>";
 		}
 		
 	
