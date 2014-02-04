@@ -6,6 +6,7 @@
 	<style>
 	.common {font-family: serif; font-weight: bold;background-color:#eef;}
 	.error {font-family: serif; font-weight: bold; background-color:#F62817;font-style:italic;}
+	.header {font-size: 15px;color:#a58500;margin: 0 0 .5em;padding: 0;font-family: Verdana,Arial,sans-serif;font-weight: bold;}
 	#x01 {font-size:xx-large; background-color:#eef; text-align: center; padding: 1ex;}
 	</style>
 </head>
