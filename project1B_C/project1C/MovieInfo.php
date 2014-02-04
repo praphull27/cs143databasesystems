@@ -8,7 +8,7 @@
 		.radio_header {padding-left: 220px;color: #999999;font-size: 13px;font-weight: normal;padding-bottom: 0;font-family: Verdana,Arial,sans-serif;}
 		.movie_name_header {color: #000000;font-size: 27px;font-weight: normal;font-family: Verdana,Arial,sans-serif;float: left;}
 		.text {color: #3366FF;font-size: 17px;font-weight: normal;padding-top: 6px;font-family: Verdana,Arial,sans-serif;}
-		.star {background-image: url(star.jpg);color: #000000; margin: 0px 0 0 0;background-position: -290px -50px;width: 90px;height:80px;line-height:66px;display: inline-block;text-align: center;vertical-align: middle;font-size: 40px;font-weight: bold;font-family:tahoma;float : right}
+		.star {background-image: url(star.jpg);color: #000000; margin: 0px 0 0 0;background-position: -290px -50px;width: 90px;height:80px;line-height:66px;display: inline-block;text-align: center;vertical-align: middle;font-size: 30px;font-weight: bold;font-family:Verdana,Arial,sans-serif;float : right}
 		.text2 {color: #3366FF;font-size: 13px;font-weight: normal;padding-top: 6px;font-family: Verdana,Arial,sans-serif;}
 		.ytext {color: #336699;font-size: 17px;font-weight: normal;padding-top: 6px;font-family: Verdana,Arial,sans-serif;}
 		.ytextheader {color: #000000;font-size: 20px;font-weight: normal;padding-top: 6px;font-family: Verdana,Arial,sans-serif;}
