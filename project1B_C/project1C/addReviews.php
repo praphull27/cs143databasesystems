@@ -64,12 +64,13 @@
 			<input type="radio" name="type" value="movie">Movie
 			</div>
 		</form>
-		<div id="menu">
+		<div id="menu" align="center">
 			<ul>
 			<li><a href="addActorDirector.php">Add New Actor/Director</a></li>
 			<li><a href="addMovie.php">Add New Movie</a></li>
 			<li><a href="addDirectorToMovies.php">Add Director To Movie</a></li>
 			<li><a href="addActorToMovies.php">Add Actor To Movie</a></li>
+			<li><a href="addGenre.php">Add Genre To Movie</a></li>
 		</ul></div>
 	</div>
 	<div class= "wrapper">
@@ -114,7 +115,7 @@
 			$db_selected=mysql_select_db("CS143", $db_connection) or die ("<h3 class=\"error_Text\">Could not connect to the database due to: " . mysql_errno() . " : " . mysql_error() . "</h3>");
 			$newComment = mysql_query("INSERT INTO Review VALUES('$name', '$time', $id, $rating, '$comment');");
 			if(!$newComment) {
-				die ("<h3 class=\"error_Text\">Adding New Review database failed due to: " . mysql_errno() . " : " . mysql_error() . "</h3>");
+				die ("<h3 class=\"error_Text\">Adding New Review database failed</h3>");
 			}
 
 			echo "<h1 class =\"header\">Review Added Successfully</h1>"; 

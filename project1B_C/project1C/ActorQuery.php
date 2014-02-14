@@ -10,7 +10,7 @@ function customError($errno, $errstr, $errfile, $errline) {
 		//establishing a connection
 		$db_connection = mysql_connect("localhost", "cs143", "") or die ("<h3 class=\"error\">Database Connection Failed due to: " . mysql_errno() . " : " . mysql_error() . "</h3>");
 		//connecting to database	
-		$db_selected=mysql_select_db("TEST", $db_connection);
+		$db_selected=mysql_select_db("CS143", $db_connection);
 		if (!$db_selected) {
 			echo "<h3 style=\"padding-left: 280px;float:center;font-family: Verdana,Arial,sans-serif;\" >Web Page Not Available !!! </h3>";
 			exit(1);

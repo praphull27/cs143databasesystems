@@ -64,12 +64,13 @@
 			<input type="radio" name="type" value="movie">Movie
 			</div>
 		</form>
-		<div id="menu">
+		<div id="menu" align="center">
 			<ul>
 			<li><a href="addActorDirector.php">Add New Actor/Director</a></li>
 			<li><a href="addMovie.php">Add New Movie</a></li>
 			<li><a href="addDirectorToMovies.php">Add Director To Movie</a></li>
 			<li><a href="addActorToMovies.php">Add Actor To Movie</a></li>
+			<li><a href="addGenre.php">Add Genre To Movie</a></li>
 		</ul></div>
 	</div>
 	<div class= "wrapper">
@@ -78,8 +79,8 @@
 		<?php
 			$db_connection = mysql_connect("localhost", "cs143", "") or die ("<h3 class=\"error_Text\">Database Connection Failed due to: " . mysql_errno() . " : " . mysql_error() . "</h3>");
 			$db_selected=mysql_select_db("CS143", $db_connection) or die ("<h3 class=\"error_Text\">Could not connect to the database due to: " . mysql_errno() . " : " . mysql_error() . "</h3>");
-			$Movies = mysql_query('SELECT id, title, year FROM Movie;');
-			$Director = mysql_query('SELECT id, first, last, dob AS movie FROM Director;');
+			$Movies = mysql_query('SELECT id, title, year FROM Movie ORDER BY title;');
+			$Director = mysql_query('SELECT id, first, last, dob AS movie FROM Director ORDER BY first;');
 		?>
 		<form action="./addDirectorToMovies.php" method="GET">
 			<h1 class="input_fields">
@@ -116,7 +117,7 @@
 			}
 			$newRole = mysql_query("INSERT INTO MovieDirector VALUES($mid, $aid);");
 			if(!$newRole) {
-				die ("<h3 class=\"error_Text\">Adding New Role into database failed due to: " . mysql_errno() . " : " . mysql_error() . "</h3>");
+				die ("<h3 class=\"error_Text\">Adding New Role into database failed</h3>");
 			}
 			echo "<h1 class =\"header\">Role Added Successfully</h1>"; 
 		}

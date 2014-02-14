@@ -64,12 +64,13 @@
 			<input type="radio" name="type" value="movie">Movie
 			</div>
 		</form>
-		<div id="menu">
+		<div id="menu" align="center">
 			<ul>
 			<li><a href="addActorDirector.php">Add New Actor/Director</a></li>
 			<li><a href="addMovie.php">Add New Movie</a></li>
 			<li><a href="addDirectorToMovies.php">Add Director To Movie</a></li>
 			<li><a href="addActorToMovies.php">Add Actor To Movie</a></li>
+			<li><a href="addGenre.php">Add Genre To Movie</a></li>
 		</ul></div>
 	</div>
 	<div class= "wrapper">
@@ -80,7 +81,7 @@
 				<div class="error_Text">Title of the movie is Required.</div><BR>
 				Movie Title: <input type="text" name="title"/><span class="error_Text"> *</span><BR><BR>
 				Release Year (YYYY): <input type="text" name="year"/><BR><BR>
-				MPAA Rating (Between 0.0 and 5.0): <input type="text" name="rating"/><BR><BR>
+				MPAA Rating: <input type="text" name="rating"/><BR><BR>
 				Production Company: <input type="text" name="company"/><BR><BR>
 				<input type="submit" value="Submit"/><BR>
 			</h1>
@@ -108,10 +109,6 @@
 			if(($year != '') && (!preg_match('/^\d\d\d\d$/', $year))) {
 				die ("<span class=\"error_Text\">Format of Release Year should be YYYY.</span>");
 			}
-
-			if(($rating != '') && ($rating < 0 || $rating > 5)) {
-				die ("<span class=\"error_Text\">MPAA Rating should be between 0.0 and 5.0</span>");
-			}
 			
 			$db_connection = mysql_connect("localhost", "cs143", "") or die ("<h3 class=\"error_Text\">Database Connection Failed due to: " . mysql_errno() . " : " . mysql_error() . "</h3>");
 			$db_selected=mysql_select_db("CS143", $db_connection) or die ("<h3 class=\"error_Text\">Could not connect to the database due to: " . mysql_errno() . " : " . mysql_error() . "</h3>");
@@ -124,7 +121,7 @@
 			$new_id = $id + 1;
 			$newMovie = mysql_query("INSERT INTO Movie VALUES($new_id, '$title', '$year', '$rating', '$company');");
 			if(!$newMovie) {
-				die ("<h3 class=\"error_Text\">Adding New Movie into database failed due to: " . mysql_errno() . " : " . mysql_error() . "</h3>");
+				die ("<h3 class=\"error_Text\">Adding New Movie into database failed</h3>");
 			}
 			$updateMaxMovieTable = mysql_query("UPDATE MaxMovieID SET id = $new_id;");
 			echo "<h1 class =\"header\">Movie Added Successfully</h1>"; 

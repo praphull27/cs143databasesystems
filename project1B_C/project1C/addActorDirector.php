@@ -64,12 +64,13 @@
 			<input type="radio" name="type" value="movie">Movie
 			</div>
 		</form>
-		<div id="menu">
+		<div id="menu" align="center">
 			<ul>
 			<li><a href="addActorDirector.php">Add New Actor/Director</a></li>
 			<li><a href="addMovie.php">Add New Movie</a></li>
 			<li><a href="addDirectorToMovies.php">Add Director To Movie</a></li>
 			<li><a href="addActorToMovies.php">Add Actor To Movie</a></li>
+			<li><a href="addGenre.php">Add Genre To Movie</a></li>
 		</ul></div>
 	</div>
 	<div class= "wrapper">
@@ -142,12 +143,12 @@
 			if($type == 'A') {
 				$newActor = mysql_query("INSERT INTO Actor VALUES($new_id, '$last_name', '$first_name', '$sex', '$dob', '$dod');");
 				if(!$newActor) {
-					die ("<h3 class=\"error_Text\">Adding New Actor into database failed due to: " . mysql_errno() . " : " . mysql_error() . "</h3>");
+					die ("<h3 class=\"error_Text\">Adding New Actor into database failed</h3>");
 				}
 			} else {
 				$newDirector = mysql_query("INSERT INTO Director VALUES($new_id, '$last_name', '$first_name', '$dob', '$dod');");
 				if(!$newDirector) {
-					die ("<h3 class=\"error_Text\">Adding New Director into database failed due to: " . mysql_errno() . " : " . mysql_error() . "</h3>");
+					die ("<h3 class=\"error_Text\">Adding New Director into database failed</h3>");
 				}
 			}
 

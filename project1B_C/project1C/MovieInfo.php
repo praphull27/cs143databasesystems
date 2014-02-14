@@ -29,7 +29,32 @@
 		.movieInfo_odd {color: #3366FF;vertical-align: middle;padding: 5px 10px 6px;background-color: #f6f6f5;border: #fff 1px solid;display:block;}
 		.movieInfo_even {color: #3366FF;vertical-align: middle;padding: 5px 10px 6px;background-color: #fbfbfb;border: #fff 1px solid;display: block;}
 		.header2 {box-shadow: 10px 10px 5px #F8F8F8 inset;background-color: #Eee;border-top: #e8e8e8 1px solid;cursor: pointer;font-size: 15px;color: #a58500;margin: 0 0 1px 0;padding: 6px 10px;display: block;font-family: Verdana,Arial,sans-serif;}
-		
+		.navStyle
+		{
+		background-color: rgb(0, 0, 0);
+		color: rgb(255, 255, 255);
+		cursor: auto;
+		display: inline;
+		font-family: verdana;
+		font-size: 10px;
+		font-weight: bold;
+		font-style:italic;
+		height: 16px;
+		line-height: 16.899999618530273px;
+		list-style-type: none;
+		padding-bottom: 4px;
+		padding-left: 4px;
+		padding-right: 4px;
+		padding-top: 4px;
+		text-align: center;
+		text-decoration: none solid rgb(255, 255, 255);
+		text-transform: uppercase;
+		width: 86px;
+	}
+		li {
+		display:inline;
+
+	}
 		
 		</style>
 	</head>	
@@ -50,6 +75,14 @@
 			</div>
 			
 		</form>
+		<div id="menu" align="center">
+			<ul>
+			<li><a class="navStyle" href="addActorDirector.php">Add New Actor/Director</a></li>
+			<li><a class="navStyle" href="addMovie.php">Add New Movie</a></li>
+			<li><a class="navStyle" href="addDirectorToMovies.php">Add Director To Movie</a></li>
+			<li><a class="navStyle" href="addActorToMovies.php">Add Actor To Movie</a></li>
+			<li><a class="navStyle" href="addGenre.php">Add Genre To Movie</a></li>
+		</ul></div>
 		</div>
 		
 		<div class= "wrapper">
@@ -89,7 +122,7 @@ require_once 'MovieQuery.php';
 				$countreviews = $crrow[0];
 			}
 			$dresult = getMovieDirector($mid);
-			echo "<div><table width=\"100%\"><tbody><tr><td width=\"60%\"><div><div class =\"movie_name_header\"><B>".$title."</B></div> <div class=\"text\">(".$year.")</div></div><br><div><a href=\"http://192.168.56.20/~cs143/project1B_C/project1C/updateMovie.php?input_id=".$mid."\" style=\"text-decoration: none\"> (edit )</a></div><br><div class=\"text\" style=\"padding-left: 5px;color: #a58500;font-family: Verdana,Arial,sans-serif;\"> ";
+			echo "<div><table width=\"100%\"><tbody><tr><td width=\"60%\"><div><div class =\"movie_name_header\"><B>".$title."</B></div> <div class=\"text\">(".$year.")</div></div><br><div><a href=\"./updateMovie.php?input_id=".$mid."\" style=\"text-decoration: none\"> (edit )</a></div><br><div class=\"text\" style=\"padding-left: 5px;color: #a58500;font-family: Verdana,Arial,sans-serif;\"> ";
 			
 			if($gresult!=""){
 			$num_rows = mysql_num_rows($gresult);
@@ -112,7 +145,7 @@ require_once 'MovieQuery.php';
 				echo "<td width=\"30%\"> <div class = \"text2\"><B>Ratings:</B> ".$avgrating."/"."5 from ".$countratings." users";
 			}
 			echo "<br><B><a href=\"#reviewId\" style=\"text-decoration: none; color: #3366FF;font-family: Verdana,Arial,sans-serif\"><U>Reviews:</U></B> <U>".$countreviews." users</U>  </a> <B>  MPAA Rating:</B> ".$MPAArating;
-			echo "<br> <br><a href=\"http://192.168.56.20/~cs143/project1B_C/project1C/AddReviews.php?input_id=".$mid."\" style=\"text-decoration: none;\">Add Your Review Now!</a>";
+			echo "<br> <br><a href=\"./AddReviews.php?input_id=".$mid."\" style=\"text-decoration: none;\">Add Your Review Now!</a>";
 			
 			echo "</div></td>";
 			if($avgrating != "N/A"){
@@ -128,7 +161,7 @@ require_once 'MovieQuery.php';
 			while ($drow = mysql_fetch_row($dresult)) {	
 				$dir = $drow[0]." ".$drow[1]." (".$drow[2].")";
 				echo "<td class = \"text2\">".$dir;
-				echo "<a href=\"http://192.168.56.20/~cs143/project1B_C/project1C/updateActorDirector.php?input_id=".$drow[3]."&input_type=Director\" style=\"text-decoration: none\">(edit)</a>";
+				echo "<a href=\"./updateActorDirector.php?input_id=".$drow[3]."&input_type=D\" style=\"text-decoration: none\">(edit)</a>";
 				if($i!=$num_rows-1){
 					echo ",";
 				}			
@@ -150,10 +183,10 @@ require_once 'MovieQuery.php';
 				while ($arow = mysql_fetch_row($aresult)) {
 						
 						if($i%2==1){
-							echo "<div class = \"movieInfo_odd\"><a href=\"http://192.168.56.20/~cs143/project1B_C/project1C/ActorInfo.php?id=".$arow[0]."\" style=\"text-decoration: none;\">".$arow[1]." ".$arow[2]."</a><div><a href=\"http://192.168.56.20/~cs143/project1B_C/project1C/updateActorDirector.php?input_id=".$drow[3]."&input_type=Director\" style=\"text-decoration: none\">(edit)</a></div><br>(".$arow[3].")</div>";
+							echo "<div class = \"movieInfo_odd\"><a href=\"./ActorInfo.php?id=".$arow[0]."\" style=\"text-decoration: none;\">".$arow[1]." ".$arow[2]."</a><div><a href=\"./updateActorDirector.php?input_id=".$arow[0]."&input_type=A\" style=\"text-decoration: none\">(edit)</a></div><br>(".$arow[3].")</div>";
 						
 						}else{
-								echo "<div class = \"movieInfo_even\"><a href=\"http://192.168.56.20/~cs143/project1B_C/project1C/ActorInfo.php?id=".$arow[0]."\" style=\"text-decoration: none;\">".$arow[1]." ".$arow[2]."</a><div><a href=\"http://192.168.56.20/~cs143/project1B_C/project1C/updateActorDirector.php?input_id=".$drow[3]."&input_type=Director\" style=\"text-decoration: none\">(edit)</a></div><br>(".$arow[3].")</div>";
+								echo "<div class = \"movieInfo_even\"><a href=\"./ActorInfo.php?id=".$arow[0]."\" style=\"text-decoration: none;\">".$arow[1]." ".$arow[2]."</a><div><a href=\"./updateActorDirector.php?input_id=".$arow[0]."&input_type=A\" style=\"text-decoration: none\">(edit)</a></div><br>(".$arow[3].")</div>";
 						}
 						
 					$i = $i+1;

@@ -23,7 +23,32 @@
 		.header2 {box-shadow: 10px 10px 5px #F8F8F8 inset;background-color: #Eee;border-top: #e8e8e8 1px solid;cursor: pointer;font-size: 15px;color: #a58500;margin: 0 0 1px 0;padding: 6px 10px;display: block;font-family: Verdana,Arial,sans-serif;}
 		.text2 {color: #3366FF;font-size: 15px;font-weight: normal;padding-top: 6px;font-family: Verdana,Arial,sans-serif;}
 		.subwrapper{margin: 0 auto; width: 890px; height: auto;padding: 3px; background: white;border-style:solid; border-color:#C8C8C8 ;border-radius:10px;border-width:1px;}
-		
+		.navStyle
+		{
+		background-color: rgb(0, 0, 0);
+		color: rgb(255, 255, 255);
+		cursor: auto;
+		display: inline;
+		font-family: verdana;
+		font-size: 10px;
+		font-weight: bold;
+		font-style:italic;
+		height: 16px;
+		line-height: 16.899999618530273px;
+		list-style-type: none;
+		padding-bottom: 4px;
+		padding-left: 4px;
+		padding-right: 4px;
+		padding-top: 4px;
+		text-align: center;
+		text-decoration: none solid rgb(255, 255, 255);
+		text-transform: uppercase;
+		width: 86px;
+	}
+		li {
+		display:inline;
+
+	}
 		</style>
 	</head>	
 	<body>
@@ -43,6 +68,14 @@
 			<input type="radio" name="type" value="movie">Movie
 			</div>
 		</form>
+		<div id="menu" align="center">
+			<ul>
+			<li><a class="navStyle" href="addActorDirector.php">Add New Actor/Director</a></li>
+			<li><a class="navStyle" href="addMovie.php">Add New Movie</a></li>
+			<li><a class="navStyle" href="addDirectorToMovies.php">Add Director To Movie</a></li>
+			<li><a class="navStyle" href="addActorToMovies.php">Add Actor To Movie</a></li>
+			<li><a class="navStyle" href="addGenre.php">Add Genre To Movie</a></li>
+		</ul></div>
 		</div>
 		<div class= "wrapper">
 <?php
@@ -61,7 +94,7 @@ require_once 'ActorQuery.php';
 					}else{
 						$type = "Actress";
 					}
-					echo "<div><span class = \"year_col\"><a href=\"http://192.168.56.20/~cs143/project1B_C/project1C/updateActorDirector.php?input_id=".$aid."&input_type=Actor\" style=\"text-decoration: none\">(edit)</a></span><div class = \"info_header\"><B>".$row[0]." ".$row[1]."</B></div><div style=\"padding-left: 5px;color: #a58500;font-family: Verdana,Arial,sans-serif;\">(".$type.")</div></div>";
+					echo "<div><span class = \"year_col\"><a href=\"./updateActorDirector.php?input_id=".$aid."&input_type=A\" style=\"text-decoration: none\">(edit)</a></span><div class = \"info_header\"><B>".$row[0]." ".$row[1]."</B></div><div style=\"padding-left: 5px;color: #a58500;font-family: Verdana,Arial,sans-serif;\">(".$type.")</div></div>";
 					echo "<h1 class = \"text2\"><B>Born On:  </B>".$row[3]."</h1>";
 					if($row[4]!=""){
 						echo "<h1 class = \"text2\"><B>Died On:  </B>".$row[4]."</h1>";
@@ -79,10 +112,10 @@ require_once 'ActorQuery.php';
 					while ($Mrow = mysql_fetch_row($Mresult)) {
 						
 						if($i%2==1){
-							echo "<div class = \"movieInfo_odd\"><span class = \"year_col\">".$Mrow[2]."</span><a href=\"http://192.168.56.20/~cs143/project1B_C/project1C/MovieInfo.php?id=".$Mrow[0]."\" style=\"text-decoration: none\" color: \"#3366FF\"; font-family:Verdana>".$Mrow[1]."</a><div><a href=\"http://192.168.56.20/~cs143/project1B_C/project1C/updateMovie.php?input_id=".$Mrow[0]."\" style=\"text-decoration: none\">(edit)</a></div><br>(".$Mrow[3].")</div>";
+							echo "<div class = \"movieInfo_odd\"><span class = \"year_col\">".$Mrow[2]."</span><a href=\"./MovieInfo.php?id=".$Mrow[0]."\" style=\"text-decoration: none\" color: \"#3366FF\"; font-family:Verdana>".$Mrow[1]."</a><br>(".$Mrow[3].")</div>";
 						
 						}else{
-							echo "<div class = \"movieInfo_even\"><span class = \"year_col\">".$Mrow[2]."</span><a href=\"http://192.168.56.20/~cs143/project1B_C/project1C/MovieInfo.php?id=".$Mrow[0]."\" style=\"text-decoration: none\" color: \"#3366FF\"; font-family:Verdana>".$Mrow[1]."</a>div><a href=\"http://192.168.56.20/~cs143/project1B_C/project1C/updateMovie.php?input_id=".$Mrow[0]."\" style=\"text-decoration: none\">(edit)</a></div><br>(".$Mrow[3].")</div>";
+							echo "<div class = \"movieInfo_even\"><span class = \"year_col\">".$Mrow[2]."</span><a href=\"./MovieInfo.php?id=".$Mrow[0]."\" style=\"text-decoration: none\" color: \"#3366FF\"; font-family:Verdana>".$Mrow[1]."</a><br>(".$Mrow[3].")</div>";
 						}
 						
 					$i = $i+1;

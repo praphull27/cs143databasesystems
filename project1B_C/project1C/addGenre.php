@@ -1,6 +1,6 @@
 <html>
 <head>
-	<title>Update Movie</title>
+	<title>Add Genre to Movies</title>
 	<style type="text/css">
 	.sectionheader {font-size: 15px;color:#a58500;margin: 0 0 .5em;padding: 0;font-family: Verdana,Arial,sans-serif;font-weight:bold;}
 	.header {color: #202020;font-size: 17px;font-weight: normal;padding-bottom: 0;font-family: Verdana,Arial,sans-serif;}
@@ -64,7 +64,7 @@
 			<input type="radio" name="type" value="movie">Movie
 			</div>
 		</form>
-		<div id="menu" align="center"fire>
+		<div id="menu" align="center">
 			<ul>
 			<li><a href="addActorDirector.php">Add New Actor/Director</a></li>
 			<li><a href="addMovie.php">Add New Movie</a></li>
@@ -74,59 +74,44 @@
 		</ul></div>
 	</div>
 	<div class= "wrapper">
+		<h1 class ="header">Add Genre to Movies</h1>
+		<hr/>
 		<?php
 			$db_connection = mysql_connect("localhost", "cs143", "") or die ("<h3 class=\"error_Text\">Database Connection Failed due to: " . mysql_errno() . " : " . mysql_error() . "</h3>");
 			$db_selected=mysql_select_db("CS143", $db_connection) or die ("<h3 class=\"error_Text\">Could not connect to the database due to: " . mysql_errno() . " : " . mysql_error() . "</h3>");
-			$input_id = $_GET['input_id'];
-			if(!isset($_GET['title'])) {
-					echo "<h1 class =\"header\">Update Movie</h1>";
-					$Movie = mysql_query("SELECT * FROM Movie WHERE id=$input_id;");
-					$row = mysql_fetch_row($Movie);
+			$Movies = mysql_query('SELECT id, title, year FROM Movie ORDER BY title;');
 		?>
-		<hr/>
-		<form action="./updateMovie.php" method="GET">		
+		<form action="./addGenre.php" method="GET">
 			<h1 class="input_fields">
-				<div class="error_Text">Title of the movie is Required.</div><BR>
-				<input type="hidden" name="input_id" value="<?php echo $_GET['input_id'];?>"/>
-				Movie Title: <input type="text" name="title" value="<?php echo $row[1];?>"/><span class="error_Text"> *</span><BR><BR>
-				Release Year (YYYY): <input type="text" name="year" value="<?php echo $row[2];?>"/><BR><BR>
-				MPAA Rating: <input type="text" name="rating" value="<?php echo $row[3];?>"/><BR><BR>
-				Production Company: <input type="text" name="company" value="<?php echo $row[4];?>"/><BR><BR>
-				<input type="submit" value="Update"/><BR>
+				<div class="error_Text">All Fields are Required.</div><BR>
+				Movie: <select name="mid">
+					<?php
+						while ($row = mysql_fetch_row($Movies)) {
+							$value = $row[1] . " (" . $row[2] . ")";
+							echo "<option value=\"$row[0]\">$value</option>";
+						}
+					?>
+				</select><span class="error_Text"> *</span><BR><BR>
+				Genre: <input type="text" name="genre"/><span class="error_Text"> *</span><BR><BR>
+				<input type="submit" value="Submit"/><BR>
 			</h1>
 		</form>
-		<?php
-			}
-		?>
 		<hr/>
 		<?php
 		function customError($errno, $errstr, $errfile, $errline) {}
 		set_error_handler("customError", E_ALL);
-		if(isset($_GET['title'])) {
-			if ($_GET['title'] != '') {
-				$title = trim($_GET['title']);
+		if(isset($_GET['mid'])){
+			if ($_GET['mid'] != '' || $_GET['genre'] != '') {
+				$mid = trim($_GET['mid']);
+				$genre = trim($_GET['genre']);
 			} else {
-				die ("<span class=\"error_Text\">Title of the Movie is Required.</span>");
+				die ("<span class=\"error_Text\">All Fields are Required.</span>");
 			}
-			if (isset($_GET['year'])) {
-				$year = trim($_GET['year']);
+			$newRole = mysql_query("INSERT INTO MovieGenre VALUES($mid, '$genre');");
+			if(!$newRole) {
+				die ("<h3 class=\"error_Text\">Adding New Genre into database failed</h3>");
 			}
-			if (isset($_GET['rating'])) {
-				$rating = trim($_GET['rating']);
-			}
-			if (isset($_GET['company'])) {
-				$company = trim($_GET['company']);
-			}
-
-			if(($year != '') && (!preg_match('/^\d\d\d\d$/', $year))) {
-				die ("<span class=\"error_Text\">Format of Release Year should be YYYY.</span>");
-			}
-			
-			$newMovie = mysql_query("UPDATE Movie SET title='$title', year='$year', rating='$rating', company='$company' WHERE id=$input_id;");
-			if(!$newMovie) {
-				die ("<h3 class=\"error_Text\">Updating Movie details failed</h3>");
-			}
-			echo "<h1 class =\"header\">Record Updated Successfully</h1>"; 
+			echo "<h1 class =\"header\">Genre Added Successfully</h1>"; 
 		}
 		?>
 	</div>

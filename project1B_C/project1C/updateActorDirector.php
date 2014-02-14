@@ -64,12 +64,13 @@
 			<input type="radio" name="type" value="movie">Movie
 			</div>
 		</form>
-		<div id="menu">
+		<div id="menu" align="center">
 			<ul>
 			<li><a href="addActorDirector.php">Add New Actor/Director</a></li>
 			<li><a href="addMovie.php">Add New Movie</a></li>
 			<li><a href="addDirectorToMovies.php">Add Director To Movie</a></li>
 			<li><a href="addActorToMovies.php">Add Actor To Movie</a></li>
+			<li><a href="addGenre.php">Add Genre To Movie</a></li>
 		</ul></div>
 	</div>
 	<div class= "wrapper">
@@ -171,12 +172,12 @@
 			if($_GET['input_type'] == 'A') {
 				$newActor = mysql_query("UPDATE Actor SET last='$last_name', first='$first_name', sex='$sex', dob='$dob', dod='$dod' WHERE id=$input_id;");
 				if(!$newActor) {
-					die ("<h3 class=\"error_Text\">Updating Actor details failed due to: " . mysql_errno() . " : " . mysql_error() . "</h3>");
+					die ("<h3 class=\"error_Text\">Updating Actor details failed</h3>");
 				}
 			} else {
 				$newDirector = mysql_query("UPDATE Director SET last='$last_name', first='$first_name', dob='$dob', dod='$dod' WHERE id=$input_id;");
 				if(!$newDirector) {
-					die ("<h3 class=\"error_Text\">Updating Director details failed due to: " . mysql_errno() . " : " . mysql_error() . "</h3>");
+					die ("<h3 class=\"error_Text\">Updating Director details failed</h3>");
 				}
 			}
 			echo "<h1 class =\"header\">Record Updated Successfully</h1>"; 

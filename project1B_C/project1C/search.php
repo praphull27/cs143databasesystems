@@ -16,6 +16,32 @@
 		.image_header {height: 80px; margin: 0px 0 0 0; background-image: url(movies_banner.jpg);}
 		.header2 {box-shadow: 10px 10px 5px #F8F8F8 inset;background-color: #Eee;border-top: #e8e8e8 1px solid;cursor: pointer;font-size: 15px;color: #a58500;margin: 0 0 1px 0;padding: 6px 10px;display: block;font-family: Verdana,Arial,sans-serif;}
 		.subwrapper{margin: 0 auto; width: 890px; height: auto;padding: 3px; background: white;border-style:solid; border-color:#C8C8C8 ;border-radius:10px;border-width:1px;}
+		.navStyle
+		{
+		background-color: rgb(0, 0, 0);
+		color: rgb(255, 255, 255);
+		cursor: auto;
+		display: inline;
+		font-family: verdana;
+		font-size: 10px;
+		font-weight: bold;
+		font-style:italic;
+		height: 16px;
+		line-height: 16.899999618530273px;
+		list-style-type: none;
+		padding-bottom: 4px;
+		padding-left: 4px;
+		padding-right: 4px;
+		padding-top: 4px;
+		text-align: center;
+		text-decoration: none solid rgb(255, 255, 255);
+		text-transform: uppercase;
+		width: 86px;
+	}
+		li {
+		display:inline;
+
+	}
 		</style>
 	</head>	
 	<body>
@@ -34,6 +60,15 @@
 			<input type="radio" name="type" value="movie">Movie
 			</div>
 		</form>
+		<div id="menu" align="center">
+			<ul>
+			<li><a class="navStyle" href="addActorDirector.php">Add New Actor/Director</a></li>
+			<li><a class="navStyle" href="addMovie.php">Add New Movie</a></li>
+			<li><a class="navStyle" href="addDirectorToMovies.php">Add Director To Movie</a></li>
+			<li><a class="navStyle" href="addActorToMovies.php">Add Actor To Movie</a></li>
+			<li><a class="navStyle" href="addGenre.php">Add Genre To Movie</a></li>
+
+		</ul></div>
 		
 			</div>	<div class= "wrapper">
 
@@ -104,10 +139,10 @@ if($keywords[0]!=''){
 			echo "<tbody>";
 			while ($row = mysql_fetch_row($Aresult)) {
 				if($i%2==1){ 
-				echo "<tr class = \"findResult_odd\"><td class = \"result_Text\" height = \"40\"><a href=\"http://192.168.56.20/~cs143/project1B_C/project1C/ActorInfo.php?id=".$row[0]."\" style=\"text-decoration: none\">".$row[1]." ".$row[2]." (".$row[3].")</a></td><td><a href=\"http://192.168.56.20/~cs143/project1B_C/project1C/updateActorDirector.php?input_id=".$row[0]."&input_type=Actor\" style=\"text-decoration: none\">".edit ."</a></td></tr>";
+				echo "<tr class = \"findResult_odd\"><td class = \"result_Text\" height = \"40\"><a href=\"./ActorInfo.php?id=".$row[0]."\" style=\"text-decoration: none\">".$row[1]." ".$row[2]." (".$row[3].")</a></td><td><a href=\"./updateActorDirector.php?input_id=".$row[0]."&input_type=A\" style=\"text-decoration: none\">(edit)</a></td></tr>";
 			
 				}else{
-					echo "<tr class = \"findResult_even\"><td class = \"result_Text\" height = \"40\"><a href=\"http://192.168.56.20/~cs143/project1B_C/project1C/ActorInfo.php?id=".$row[0]."\" style=\"text-decoration: none\">".$row[1]." ".$row[2]." (".$row[3].")</a></td><td><a href=\"http://192.168.56.20/~cs143/project1B_C/project1C/updateActorDirector.php?input_id=".$row[0]."&input_type=Actor\" style=\"text-decoration: none\">".edit ."</a></td></tr>";
+					echo "<tr class = \"findResult_even\"><td class = \"result_Text\" height = \"40\"><a href=\"./ActorInfo.php?id=".$row[0]."\" style=\"text-decoration: none\">".$row[1]." ".$row[2]." (".$row[3].")</a></td><td><a href=\"./updateActorDirector.php?input_id=".$row[0]."&input_type=A\" style=\"text-decoration: none\">(edit)</a></td></tr>";
 				}
 				
 				$i = $i+1;
@@ -125,10 +160,10 @@ if($keywords[0]!=''){
 			echo "<tbody>";
 			while ($mrow = mysql_fetch_row($Mresult)) {
 				if($j%2==1){
-				echo "<tr class = \"findResult_odd\"><td class = \"result_Text\" height = \"40\"><a href=\"http://192.168.56.20/~cs143/project1B_C/project1C/MovieInfo.php?id=".$mrow[0]."\" style=\"text-decoration: none\">".$mrow[1]." (".$mrow[2].")</a></td><td><a href=\"http://192.168.56.20/~cs143/project1B_C/project1C/updateMovie.php?input_id=".$mrow[0]."\" style=\"text-decoration: none\">(edit)</a></td></tr>";
+				echo "<tr class = \"findResult_odd\"><td class = \"result_Text\" height = \"40\"><a href=\"./MovieInfo.php?id=".$mrow[0]."\" style=\"text-decoration: none\">".$mrow[1]." (".$mrow[2].")</a></td><td><a href=\"./updateMovie.php?input_id=".$mrow[0]."\" style=\"text-decoration: none\">(edit)</a></td></tr>";
 			
 				}else{
-					echo "<tr class = \"findResult_even\"><td class = \"result_Text\" height = \"40\"><a href=\"http://192.168.56.20/~cs143/project1B_C/project1C/MovieInfo.php?id=".$mrow[0]."\" style=\"text-decoration: none\">".$mrow[1]." (".$mrow[2].")</a></td><td><a href=\"http://192.168.56.20/~cs143/project1B_C/project1C/updateMovie.php?input_id=".$mrow[0]."\" style=\"text-decoration: none\">(edit)</a></td></tr>";
+					echo "<tr class = \"findResult_even\"><td class = \"result_Text\" height = \"40\"><a href=\"./MovieInfo.php?id=".$mrow[0]."\" style=\"text-decoration: none\">".$mrow[1]." (".$mrow[2].")</a></td><td><a href=\"./updateMovie.php?input_id=".$mrow[0]."\" style=\"text-decoration: none\">(edit)</a></td></tr>";
 				}
 				
 				$j = $j+1;
