@@ -12,7 +12,7 @@ function customError($errno, $errstr, $errfile, $errline) {
 		//connecting to database	
 		$db_selected=mysql_select_db("TEST", $db_connection);
 		if (!$db_selected) {
-			echo "<h3>Web Page Not Available </h3>";
+			echo "<h3 style=\"padding-left: 280px;float:center;font-family: Verdana,Arial,sans-serif;\" >Web Page Not Available !!! </h3>";
 			exit(1);
 		}
 		return $db_connection;
@@ -47,7 +47,7 @@ function getMovieGenre($mid){
 }
 
 function getMovieDirector($mid){
-	$query = "select first,last,dob from Director D, MovieDirector MD where MD.did = D.id And MD.mid =".$mid;
+	$query = "select first,last,dob,did from Director D, MovieDirector MD where MD.did = D.id And MD.mid =".$mid;
 	$db_connection = getConnection();
 		
 		$result = mysql_query($query, $db_connection) or die ("<h3>" . mysql_errno() . " : " . mysql_error() . "</h3>");

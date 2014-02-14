@@ -61,7 +61,7 @@ require_once 'ActorQuery.php';
 					}else{
 						$type = "Actress";
 					}
-					echo "<div><div class = \"info_header\"><B>".$row[0]." ".$row[1]."</B></div><div style=\"padding-left: 5px;color: #a58500;font-family: Verdana,Arial,sans-serif;\">(".$type.")</div></div>";
+					echo "<div><span class = \"year_col\"><a href=\"http://192.168.56.20/~cs143/project1B_C/project1C/updateActorDirector.php?input_id=".$aid."&input_type=Actor\" style=\"text-decoration: none\">(edit)</a></span><div class = \"info_header\"><B>".$row[0]." ".$row[1]."</B></div><div style=\"padding-left: 5px;color: #a58500;font-family: Verdana,Arial,sans-serif;\">(".$type.")</div></div>";
 					echo "<h1 class = \"text2\"><B>Born On:  </B>".$row[3]."</h1>";
 					if($row[4]!=""){
 						echo "<h1 class = \"text2\"><B>Died On:  </B>".$row[4]."</h1>";
@@ -79,10 +79,10 @@ require_once 'ActorQuery.php';
 					while ($Mrow = mysql_fetch_row($Mresult)) {
 						
 						if($i%2==1){
-							echo "<div class = \"movieInfo_odd\"><span class = \"year_col\">".$Mrow[2]."</span><a href=\"http://192.168.56.20/~cs143/project1B_C/project1C/MovieInfo.php?id=".$Mrow[0]."\" style=\"text-decoration: none\" color: \"#3366FF\"; font-family:Verdana>".$Mrow[1]."</a><br>(".$Mrow[3].")</div>";
+							echo "<div class = \"movieInfo_odd\"><span class = \"year_col\">".$Mrow[2]."</span><a href=\"http://192.168.56.20/~cs143/project1B_C/project1C/MovieInfo.php?id=".$Mrow[0]."\" style=\"text-decoration: none\" color: \"#3366FF\"; font-family:Verdana>".$Mrow[1]."</a><div><a href=\"http://192.168.56.20/~cs143/project1B_C/project1C/updateMovie.php?input_id=".$Mrow[0]."\" style=\"text-decoration: none\">(edit)</a></div><br>(".$Mrow[3].")</div>";
 						
 						}else{
-							echo "<div class = \"movieInfo_even\"><span class = \"year_col\">".$Mrow[2]."</span><a href=\"http://192.168.56.20/~cs143/project1B_C/project1C/MovieInfo.php?id=".$Mrow[0]."\" style=\"text-decoration: none\" color: \"#3366FF\"; font-family:Verdana>".$Mrow[1]."</a><br>(".$Mrow[3].")</div>";
+							echo "<div class = \"movieInfo_even\"><span class = \"year_col\">".$Mrow[2]."</span><a href=\"http://192.168.56.20/~cs143/project1B_C/project1C/MovieInfo.php?id=".$Mrow[0]."\" style=\"text-decoration: none\" color: \"#3366FF\"; font-family:Verdana>".$Mrow[1]."</a>div><a href=\"http://192.168.56.20/~cs143/project1B_C/project1C/updateMovie.php?input_id=".$Mrow[0]."\" style=\"text-decoration: none\">(edit)</a></div><br>(".$Mrow[3].")</div>";
 						}
 						
 					$i = $i+1;

@@ -104,10 +104,10 @@ if($keywords[0]!=''){
 			echo "<tbody>";
 			while ($row = mysql_fetch_row($Aresult)) {
 				if($i%2==1){ 
-				echo "<tr class = \"findResult_odd\"><td class = \"result_Text\" height = \"40\"><a href=\"http://192.168.56.20/~cs143/project1B_C/project1C/ActorInfo.php?id=".$row[0]."\" style=\"text-decoration: none\">".$row[1]." ".$row[2]." (".$row[3].")</a></td></tr>";
+				echo "<tr class = \"findResult_odd\"><td class = \"result_Text\" height = \"40\"><a href=\"http://192.168.56.20/~cs143/project1B_C/project1C/ActorInfo.php?id=".$row[0]."\" style=\"text-decoration: none\">".$row[1]." ".$row[2]." (".$row[3].")</a></td><td><a href=\"http://192.168.56.20/~cs143/project1B_C/project1C/updateActorDirector.php?input_id=".$row[0]."&input_type=Actor\" style=\"text-decoration: none\">".edit ."</a></td></tr>";
 			
 				}else{
-					echo "<tr class = \"findResult_even\"><td class = \"result_Text\" height = \"40\"><a href=\"http://192.168.56.20/~cs143/project1B_C/project1C/ActorInfo.php?id=".$row[0]."\" style=\"text-decoration: none\">".$row[1]." ".$row[2]." (".$row[3].")</a></td></tr>";
+					echo "<tr class = \"findResult_even\"><td class = \"result_Text\" height = \"40\"><a href=\"http://192.168.56.20/~cs143/project1B_C/project1C/ActorInfo.php?id=".$row[0]."\" style=\"text-decoration: none\">".$row[1]." ".$row[2]." (".$row[3].")</a></td><td><a href=\"http://192.168.56.20/~cs143/project1B_C/project1C/updateActorDirector.php?input_id=".$row[0]."&input_type=Actor\" style=\"text-decoration: none\">".edit ."</a></td></tr>";
 				}
 				
 				$i = $i+1;
@@ -125,10 +125,10 @@ if($keywords[0]!=''){
 			echo "<tbody>";
 			while ($mrow = mysql_fetch_row($Mresult)) {
 				if($j%2==1){
-				echo "<tr class = \"findResult_odd\"><td class = \"result_Text\" height = \"40\"><a href=\"http://192.168.56.20/~cs143/project1B_C/project1C/MovieInfo.php?id=".$mrow[0]."\" style=\"text-decoration: none\">".$mrow[1]." (".$mrow[2].")</a></td></tr>";
+				echo "<tr class = \"findResult_odd\"><td class = \"result_Text\" height = \"40\"><a href=\"http://192.168.56.20/~cs143/project1B_C/project1C/MovieInfo.php?id=".$mrow[0]."\" style=\"text-decoration: none\">".$mrow[1]." (".$mrow[2].")</a></td><td><a href=\"http://192.168.56.20/~cs143/project1B_C/project1C/updateMovie.php?input_id=".$mrow[0]."\" style=\"text-decoration: none\">(edit)</a></td></tr>";
 			
 				}else{
-					echo "<tr class = \"findResult_even\"><td class = \"result_Text\" height = \"40\"><a href=\"http://192.168.56.20/~cs143/project1B_C/project1C/MovieInfo.php?id=".$mrow[0]."\" style=\"text-decoration: none\">".$mrow[1]." (".$mrow[2].")</a></td></tr>";
+					echo "<tr class = \"findResult_even\"><td class = \"result_Text\" height = \"40\"><a href=\"http://192.168.56.20/~cs143/project1B_C/project1C/MovieInfo.php?id=".$mrow[0]."\" style=\"text-decoration: none\">".$mrow[1]." (".$mrow[2].")</a></td><td><a href=\"http://192.168.56.20/~cs143/project1B_C/project1C/updateMovie.php?input_id=".$mrow[0]."\" style=\"text-decoration: none\">(edit)</a></td></tr>";
 				}
 				
 				$j = $j+1;

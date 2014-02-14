@@ -65,6 +65,12 @@ require_once 'MovieQuery.php';
 				$MPAArating = $mrow[2];
 				$company = $mrow[3];		
 			}
+			if($MPAArating==""){
+				$MPAArating = "N/A";
+			}
+			if($company==""){
+				$company = "N/A";
+			}
 			$gresult = getMovieGenre($mid);
 			
 			$avgresult = getAverageRating($mid);
@@ -83,7 +89,7 @@ require_once 'MovieQuery.php';
 				$countreviews = $crrow[0];
 			}
 			$dresult = getMovieDirector($mid);
-			echo "<div><table width=\"100%\"><tbody><tr><td width=\"60%\"><div><div class =\"movie_name_header\"><B>".$title."</B></div> <div class=\"text\">(".$year.")</div></div><br><div class=\"text\" style = \"float: left\"> ";
+			echo "<div><table width=\"100%\"><tbody><tr><td width=\"60%\"><div><div class =\"movie_name_header\"><B>".$title."</B></div> <div class=\"text\">(".$year.")</div></div><br><div><a href=\"http://192.168.56.20/~cs143/project1B_C/project1C/updateMovie.php?input_id=".$mid."\" style=\"text-decoration: none\"> (edit )</a></div><br><div class=\"text\" style=\"padding-left: 5px;color: #a58500;font-family: Verdana,Arial,sans-serif;\"> ";
 			
 			if($gresult!=""){
 			$num_rows = mysql_num_rows($gresult);
@@ -105,8 +111,8 @@ require_once 'MovieQuery.php';
 			}else{
 				echo "<td width=\"30%\"> <div class = \"text2\"><B>Ratings:</B> ".$avgrating."/"."5 from ".$countratings." users";
 			}
-			echo "<br><B>Reviews:</B> ".$countreviews." users   <B>  MPAA Rating:</B> ".$MPAArating;
-			echo "<br> <br>Add Your Review Now!";
+			echo "<br><B><a href=\"#reviewId\" style=\"text-decoration: none; color: #3366FF;font-family: Verdana,Arial,sans-serif\"><U>Reviews:</U></B> <U>".$countreviews." users</U>  </a> <B>  MPAA Rating:</B> ".$MPAArating;
+			echo "<br> <br><a href=\"http://192.168.56.20/~cs143/project1B_C/project1C/AddReviews.php?input_id=".$mid."\" style=\"text-decoration: none;\">Add Your Review Now!</a>";
 			
 			echo "</div></td>";
 			if($avgrating != "N/A"){
@@ -122,13 +128,14 @@ require_once 'MovieQuery.php';
 			while ($drow = mysql_fetch_row($dresult)) {	
 				$dir = $drow[0]." ".$drow[1]." (".$drow[2].")";
 				echo "<td class = \"text2\">".$dir;
+				echo "<a href=\"http://192.168.56.20/~cs143/project1B_C/project1C/updateActorDirector.php?input_id=".$drow[3]."&input_type=Director\" style=\"text-decoration: none\">(edit)</a>";
 				if($i!=$num_rows-1){
 					echo ",";
 				}			
 					echo "</td>";
 				$i = $i+1;
 			}
-			}
+			}else echo "<td class = \"text2\">N/A</td>";
 			
 			echo "</tr>";
 			echo "<tr><td class = \"ytext\">Producer: </td>";
@@ -143,10 +150,10 @@ require_once 'MovieQuery.php';
 				while ($arow = mysql_fetch_row($aresult)) {
 						
 						if($i%2==1){
-							echo "<div class = \"movieInfo_odd\"><a href=\"http://192.168.56.20/~cs143/project1B_C/project1C/ActorInfo.php?id=".$arow[0]."\" style=\"text-decoration: none;color: #3366FF;\">".$arow[1]." ".$arow[2]."</a><br>(".$arow[3].")</div>";
+							echo "<div class = \"movieInfo_odd\"><a href=\"http://192.168.56.20/~cs143/project1B_C/project1C/ActorInfo.php?id=".$arow[0]."\" style=\"text-decoration: none;\">".$arow[1]." ".$arow[2]."</a><div><a href=\"http://192.168.56.20/~cs143/project1B_C/project1C/updateActorDirector.php?input_id=".$drow[3]."&input_type=Director\" style=\"text-decoration: none\">(edit)</a></div><br>(".$arow[3].")</div>";
 						
 						}else{
-								echo "<div class = \"movieInfo_even\"><a href=\"http://192.168.56.20/~cs143/project1B_C/project1C/ActorInfo.php?id=".$arow[0]."\" style=\"text-decoration: none;color: #3366FF;\">".$arow[1]." ".$arow[2]."</a><br>(".$arow[3].")</div>";
+								echo "<div class = \"movieInfo_even\"><a href=\"http://192.168.56.20/~cs143/project1B_C/project1C/ActorInfo.php?id=".$arow[0]."\" style=\"text-decoration: none;\">".$arow[1]." ".$arow[2]."</a><div><a href=\"http://192.168.56.20/~cs143/project1B_C/project1C/updateActorDirector.php?input_id=".$drow[3]."&input_type=Director\" style=\"text-decoration: none\">(edit)</a></div><br>(".$arow[3].")</div>";
 						}
 						
 					$i = $i+1;
@@ -158,7 +165,7 @@ require_once 'MovieQuery.php';
 		
 			$rresult = getReview($mid);
 			if($rresult!=""){
-					echo "<br><div class = \"subwrapper\"><div class = \"header2\"><B>User Reviews</B></div>";
+					echo "<br><div class = \"subwrapper\"><div class = \"header2\" id = \"reviewId\"><B>User Reviews</B></div>";
 					$i=1;
 				while ($rrow = mysql_fetch_row($rresult)) {
 						
