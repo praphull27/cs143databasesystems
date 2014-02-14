@@ -44,3 +44,9 @@ body {
 #movieInfo_even {color: #3366FF;vertical-align: middle;padding: 5px 10px 6px;background-color: #fbfbfb;border: #fff 1px solid;display: block;}
 #header2 {box-shadow: 10px 10px 5px #888888;background-color: #Eee;border-top: #e8e8e8 1px solid;cursor: pointer;font-size: 15px;color: #a58500;margin: 0 0 1px 0;padding: 6px 10px;display: block;font-family: Verdana,Arial,sans-serif;}
 #radio_header {padding-left: 220px}
+input_fields {
+		font-size: 12px;
+		font-weight: normal;
+		padding-bottom: 0;
+		font-family: Verdana;
+	}
