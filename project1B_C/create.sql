@@ -40,6 +40,7 @@ CREATE TABLE `Actor` (
 	`dob` DATE NOT NULL COMMENT 'Date of Birth',
 	`dod` DATE DEFAULT NULL COMMENT 'Date of Death',
 	PRIMARY KEY (`id`),
+	UNIQUE (`last`,`first`,`dob`),
 	CHECK (`dob` < `dod`),
 	CHECK (`last` IS NOT NULL OR `first` IS NOT NULL)
 ) ENGINE=INNODB DEFAULT CHARSET=utf8;
@@ -59,6 +60,7 @@ CREATE TABLE `Director` (
 	`dob` DATE NOT NULL COMMENT 'Date of Birth',
 	`dod` DATE DEFAULT NULL COMMENT 'Date of Death',
 	PRIMARY KEY (`id`),
+	UNIQUE (`last`,`first`,`dob`),
 	CHECK (`dob` < `dod`),
 	CHECK (`last` IS NOT NULL OR `first` IS NOT NULL)
 ) ENGINE=INNODB DEFAULT CHARSET=utf8;
