@@ -75,8 +75,8 @@
 	</div>
 	<div class= "wrapper">
 		<?php
-			$db_connection = mysql_connect("localhost", "cs143", "") or die ("<h3 class=\"error_Text\">Database Connection Failed due to: " . mysql_errno() . " : " . mysql_error() . "</h3>");
-			$db_selected=mysql_select_db("CS143", $db_connection) or die ("<h3 class=\"error_Text\">Could not connect to the database due to: " . mysql_errno() . " : " . mysql_error() . "</h3>");
+			$db_connection = mysql_connect("localhost", "cs143", "") or die ("<h3 class=\"error_Text\">Database Connection Failed</h3>");
+			$db_selected=mysql_select_db("CS143", $db_connection) or die ("<h3 class=\"error_Text\">Could not connect to the database</h3>");
 			$input_id = $_GET['input_id'];
 			if(!isset($_GET['dob'])) {
 				if($_GET['input_type'] == 'A') {

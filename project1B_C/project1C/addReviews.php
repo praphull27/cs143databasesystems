@@ -111,8 +111,8 @@
 				die ("<span class=\"error_Text\">Rating should be between 0.0 and 5.0</span>");
 			}
 			$time = date('Y-m-d H:i:s');
-			$db_connection = mysql_connect("localhost", "cs143", "") or die ("<h3 class=\"error_Text\">Database Connection Failed due to: " . mysql_errno() . " : " . mysql_error() . "</h3>");
-			$db_selected=mysql_select_db("CS143", $db_connection) or die ("<h3 class=\"error_Text\">Could not connect to the database due to: " . mysql_errno() . " : " . mysql_error() . "</h3>");
+			$db_connection = mysql_connect("localhost", "cs143", "") or die ("<h3 class=\"error_Text\">Database Connection Failed</h3>");
+			$db_selected=mysql_select_db("CS143", $db_connection) or die ("<h3 class=\"error_Text\">Could not connect to the database</h3>");
 			$newComment = mysql_query("INSERT INTO Review VALUES('$name', '$time', $id, $rating, '$comment');");
 			if(!$newComment) {
 				die ("<h3 class=\"error_Text\">Adding New Review database failed</h3>");

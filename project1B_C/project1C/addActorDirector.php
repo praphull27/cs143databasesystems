@@ -131,8 +131,8 @@
 				die ("<span class=\"error_Text\">Date of Death less than Date of Birth.</span>");
 			}
 			
-			$db_connection = mysql_connect("localhost", "cs143", "") or die ("<h3 class=\"error_Text\">Database Connection Failed due to: " . mysql_errno() . " : " . mysql_error() . "</h3>");
-			$db_selected=mysql_select_db("CS143", $db_connection) or die ("<h3 class=\"error_Text\">Could not connect to the database due to: " . mysql_errno() . " : " . mysql_error() . "</h3>");
+			$db_connection = mysql_connect("localhost", "cs143", "") or die ("<h3 class=\"error_Text\">Database Connection Failed</h3>");
+			$db_selected=mysql_select_db("CS143", $db_connection) or die ("<h3 class=\"error_Text\">Could not connect to the database</h3>");
 			$id = mysql_query('SELECT id FROM MaxPersonID;');
 			while ($row = mysql_fetch_row($id)) {
 				foreach ($row as $key=>$value) {

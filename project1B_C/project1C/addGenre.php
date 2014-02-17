@@ -77,8 +77,8 @@
 		<h1 class ="header">Add Genre to Movies</h1>
 		<hr/>
 		<?php
-			$db_connection = mysql_connect("localhost", "cs143", "") or die ("<h3 class=\"error_Text\">Database Connection Failed due to: " . mysql_errno() . " : " . mysql_error() . "</h3>");
-			$db_selected=mysql_select_db("CS143", $db_connection) or die ("<h3 class=\"error_Text\">Could not connect to the database due to: " . mysql_errno() . " : " . mysql_error() . "</h3>");
+			$db_connection = mysql_connect("localhost", "cs143", "") or die ("<h3 class=\"error_Text\">Database Connection Failed</h3>");
+			$db_selected=mysql_select_db("CS143", $db_connection) or die ("<h3 class=\"error_Text\">Could not connect to the database</h3>");
 			$Movies = mysql_query('SELECT id, title, year FROM Movie ORDER BY title;');
 		?>
 		<form action="./addGenre.php" method="GET">
