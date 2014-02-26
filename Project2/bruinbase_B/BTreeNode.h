@@ -19,6 +19,11 @@
 class BTLeafNode {
   public:
    /**
+    * Constructor to initialize the Leaf Node. It will assign -1 to all elements in the buffer.
+    */
+    BTLeafNode();
+
+   /**
     * Insert the (key, rid) pair to the node.
     * Remember that all keys inside a B+tree node should be kept sorted.
     * @param key[IN] the key to insert
@@ -100,8 +105,12 @@ class BTLeafNode {
    /**
     * The main memory buffer for loading the content of the disk page 
     * that contains the node.
+    * union is used to convert char buffer into int buffer and vice-versa.
     */
-    char buffer[PageFile::PAGE_SIZE];
+    union buffer_t {
+        char buffer_char[PageFile::PAGE_SIZE];
+        int buffer_int[(PageFile::PAGE_SIZE)/sizeof(int)];
+    } buffer;
 }; 
 
 
@@ -110,6 +119,10 @@ class BTLeafNode {
  */
 class BTNonLeafNode {
   public:
+   /**
+    * Constructor to initialize the Non-Leaf Node. It will assign -1 to all elements in the buffer.
+    */
+    BTNonLeafNode();
    /**
     * Insert a (key, pid) pair to the node.
     * Remember that all keys inside a B+tree node should be kept sorted.
@@ -178,8 +191,12 @@ class BTNonLeafNode {
    /**
     * The main memory buffer for loading the content of the disk page 
     * that contains the node.
+    * union is used to convert char buffer into int buffer and vice-versa.
     */
-    char buffer[PageFile::PAGE_SIZE];
+    union buffer_t {
+        char buffer_char[PageFile::PAGE_SIZE];
+        int buffer_int[(PageFile::PAGE_SIZE)/sizeof(int)];
+    } buffer;
 }; 
 
 #endif /* BTNODE_H */

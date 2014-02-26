@@ -1,4 +1,4 @@
-CS 143 - Database Systems - Winter 2014 - Project 2 - Part A
+CS 143 - Database Systems - Winter 2014 - Project 2 - Part B
 
 Team of 2 members:
 
