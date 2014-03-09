@@ -99,6 +99,11 @@ class BTreeIndex {
   /// this class is destructed. Make sure to store the values of the two 
   /// variables in disk, so that they can be reconstructed when the index
   /// is opened again later.
+  union buffer_t {
+        char buffer_char[PageFile::PAGE_SIZE];
+        int buffer_int[(PageFile::PAGE_SIZE)/sizeof(int)];
+    } buffer_temp;
+
 };
 
 #endif /* BTREEINDEX_H */
