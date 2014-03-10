@@ -164,6 +164,7 @@ RC BTreeIndex::locate(int searchKey, IndexCursor& cursor)
 {
     BTNonLeafNode nonLeafNode;
     PageId pid = rootPid;
+    RC rc;
     int i = 1;
     while (i<treeHeight) {
         nonLeafNode.read(pid, pf);
@@ -174,7 +175,9 @@ RC BTreeIndex::locate(int searchKey, IndexCursor& cursor)
     BTLeafNode leafNode;
     int eid;
     leafNode.read(pid, pf);
-    leafNode.locate(searchKey, eid);
+    if ((rc = leafNode.locate(searchKey, eid)) == RC_NO_SUCH_RECORD) {
+        return rc;
+    }
     cursor.pid = pid;
     cursor.eid = eid;
     
